@@ -1,0 +1,88 @@
+<html>
+
+<head>
+  <title>Maza Solver v1.0</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href='/static/style.css' />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<div class="jumbotron text-center">
+  <h1>Maze Solver Web Interface v1.1</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7 col-sm-offset-1">
+
+
+	  <img class="img-responsive" id="maze" width="90%" src="https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966" alt="Animation">
+
+	</div>
+    <div class="col-sm-3">
+	<div class="jumbotron text-center" id="control-panel">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default" id="undo">
+				  <span class="glyphicon glyphicon-triangle-left"></span> Undo
+				  </button>
+				  <button type="button" class="btn btn-default" id="redo">
+				  Redo <span class="glyphicon glyphicon-triangle-right"></span>
+				  </button>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<button type="button" class="btn btn-primary btn-lg" id="camera">
+				<span class="glyphicon glyphicon-facetime-video"></span>
+				</button>
+			</div>
+			<div class="col-xs-6">
+				<button type="button" class="btn btn-primary btn-lg" id="trash">
+				<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</div>
+			<div class="col-xs-6">
+				<button type="button" class="btn btn-primary btn-lg" id="edit">
+				<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+			</div>
+			<div class="col-xs-6">
+				<button type="button" class="btn btn-primary btn-lg" id="erase">
+				<span class="glyphicon glyphicon-erase"></span>
+				</button>
+			</div>
+			<div class="col-xs-12">
+				<div class="dropdown">
+					<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Algorithm
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<li><a href="#">Depth-first Search</a></li>
+						<li><a href="#">Breadth-first Search</a></li>
+						<li><a href="#">Greedy Search</a></li>
+						<li><a href="#">A* Search</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<button type="button" class="btn btn-success btn-block" id="start">Solve Maze</button>
+			</div>
+		</div>
+
+		</div>
+
+    </div>
+  </div>
+</div>
+
+<br><br><br><br>
+
+<script type="text/javascript" src="/static/script.js"></script>
+</body>
+</html>

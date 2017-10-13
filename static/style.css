@@ -1,0 +1,42 @@
+#control-panel{
+	padding-right: 35px;
+	padding-left: 35px;
+}
+
+.btn-primary{
+	margin-left: 0;
+	margin-right: 0;
+	padding: 25px;
+	margin-bottom:25px;
+	font-size: 30px;
+
+}
+
+.btn-default{
+	padding: 10px;
+	font-size: 15px;
+	margin-bottom: 30px;
+}
+
+.btn-info {
+	padding: 10px;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.dropdown-menu {
+	font-size: 16px;
+	margin-top: -10px;
+	width: 100%;
+}
+
+
+.btn-success{
+	padding: 10px;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+}
