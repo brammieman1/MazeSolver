@@ -1,4 +1,4 @@
-ocument.getElementById("camera").onclick = callPython;
+document.getElementById("camera").onclick = callPython;
 document.getElementById("trash").onclick = callPython;
 document.getElementById("edit").onclick = callPython;
 document.getElementById("erase").onclick = callPython;

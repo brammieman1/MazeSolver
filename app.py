@@ -1,6 +1,6 @@
 import gen as gen
 from flask import Flask, render_template, Response
-from camera_pi import Camera
+from camera import Camera
 # hoi
 app = Flask(__name__)
 
