@@ -12,7 +12,7 @@ function callPython(){
 
 
 	if (this.id == "camera"){
-		document.getElementById("maze").src = "{{ url_for('video_feed') }}";
+		document.getElementById("maze").src = "/video_feed";
 	}
 
 	if (this.id == "start"){
