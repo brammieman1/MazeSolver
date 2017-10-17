@@ -12,7 +12,7 @@ function callPython(){
 
 
 	if (this.id == "camera"){
-		document.getElementById("maze").src = "steam.mjpg";
+		document.getElementById("maze").src = "{{ url_for('video_feed') }}";
 	}
 
 	if (this.id == "start"){

@@ -4,10 +4,17 @@ from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
+CAPTURE, TRASH, START, RESET = "capture", "trash", "start", "reset"
+AVAILABLE_COMMANDS = {
+    'Capture': CAPTURE,
+    'Trash': TRASH,
+    'Start': START,
+    'Rest': RESET
+}
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
+def execute():
+    return render_template('index1.html', commands=AVAILABLE_COMMANDS)
 
 
 
@@ -23,7 +30,26 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+@app.route('/<cmd>')
+def command(cmd=None):
+    print (cmd)
+    if cmd == RESET:
+       camera_command = "X"
+       response = "Resetting ..."
+    else:
+        camera_command = cmd[0].upper()
+        response = "Moving {}".format(cmd.capitalize())
+    return response, 200, {'Content-Type': 'text/plain'}
+
+
 
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+
+
+
+
+
+
+
