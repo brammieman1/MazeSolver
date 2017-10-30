@@ -7,25 +7,29 @@ from PIL import Image
 from scipy.misc import imsave
 import numpy
 
+height = 0
+width = 0
 
-def binarize_image(img_path, target_path, threshold):
+def binarize_image(img_path, threshold):
     """Binarize an image."""
     image_file = Image.open(img_path)
     image = image_file.convert('L')  # convert image to monochrome
     image = numpy.array(image)
+    height, width = image_file.size()
     image = binarize_array(image, threshold)
-    imsave(target_path, image)
+    #imsave(target_path, image)
     return image
 
 def binarize_array(numpy_array, threshold=75):
     """Binarize a numpy array."""
-    for i in range(len(numpy_array)):
-        for j in range(len(numpy_array[0])):
+    result = [[1 for x in range(320)] for y in range(240)]
+    for i in range(len(result)-1):
+        for j in range(len(result[0]) - 1):
             if numpy_array[i][j].all() > threshold:
-                numpy_array[i][j] = 255
+                result[i][j] = 255
             else:
-                numpy_array[i][j] = 0
-    return numpy_array
+                result[i][j] = 0
+    return result
 
 
 def get_parser():
