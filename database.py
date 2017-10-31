@@ -22,9 +22,10 @@ sqlite3.register_adapter("array", convert_array)
 
 x = np.arrange(12).reshape(2,6)
 conn = sqlite3.connect('maze.db');
-conn.execute('''INSERT INTO MAZES ''')
+conn.execute('''INSERT INTO MAZES(NAME) VALUES ''')
 
 
+#https://stackoverflow.com/questions/18621513/python-insert-numpy-array-into-sqlite3-database
 
 
 # print("Opened database successfully");
