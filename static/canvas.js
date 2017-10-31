@@ -24,8 +24,25 @@ var player = {
 function draw(){
 
     // set canvas properties
-    var width = canvas.width();
-    var blockSize = width/board.length;
+    //var width = canvas.width();
+
+    var width = (($("#canvasSize").width())/100)*90;
+
+    console.log(width);
+
+    var widthArray = board[0].length;
+    var heightArray = board.length;
+    var blockSize = width/widthArray;
+    var height = blockSize * heightArray;
+
+
+    document.getElementById("GameBoardCanvas").height = height;
+    document.getElementById("GameBoardCanvas").width = width;
+    document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
+
+
+
+
     var ctx = canvas[0].getContext('2d');
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, width, width);
