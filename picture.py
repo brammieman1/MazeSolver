@@ -20,3 +20,4 @@ def getArray():
 if __name__ == "__main__":
     getArray()
 
+
