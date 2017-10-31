@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="HSQLDB (Local) - jdbc:hsqldb:file:/home/bram/PycharmProjects/untitled/!/bin/bash: not found/" uuid="9ad48288-1910-4b35-b211-93e7d8e8ffe8">
-      <driver-ref>hsqldb.local</driver-ref>
+    <data-source source="LOCAL" name="Sqlite (Xerial) - maze.db" uuid="ee9cb05b-19e0-4259-b692-35e660c12d6e">
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <configured-by-url>true</configured-by-url>
-      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
-      <jdbc-url>jdbc:hsqldb:file:$PROJECT_DIR$/!/bin/bash: not found/</jdbc-url>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/maze.db</jdbc-url>
     </data-source>
   </component>
 </project>
