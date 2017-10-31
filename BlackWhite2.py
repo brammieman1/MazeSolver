@@ -15,21 +15,23 @@ def binarize_image(img_path, threshold):
     image_file = Image.open(img_path)
     image = image_file.convert('L')  # convert image to monochrome
     image = numpy.array(image)
-    height, width = image_file.size()
+    height, width = image_file.size
     image = binarize_array(image, threshold)
     #imsave(target_path, image)
-    return image
+    listImage = image.tolist()
+    return listImage
 
 def binarize_array(numpy_array, threshold=75):
     """Binarize a numpy array."""
-    result = [[1 for x in range(320)] for y in range(240)]
-    for i in range(len(result)-1):
-        for j in range(len(result[0]) - 1):
-            if numpy_array[i][j].all() > threshold:
-                result[i][j] = 255
-            else:
-                result[i][j] = 0
-    return result
+    result = [[1 for x in range(width)] for y in range(height)]
+    for i in range(len(numpy_array)):
+        for j in range(len(numpy_array[i])):
+           if numpy_array[i][j] > threshold:
+                numpy_array[i][j] = 1 #white
+           else:
+                numpy_array[i][j] = 0
+#    print(numpy_array)
+    return numpy_array
 
 
 def get_parser():
@@ -57,4 +59,4 @@ def get_parser():
 
 if __name__ == "__main__":
     args = get_parser().parse_args()
-    binarize_image(args.input, args.output, args.threshold)
+    binarize_image(args.input, args.threshold)

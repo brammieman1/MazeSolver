@@ -6,6 +6,10 @@ document.getElementById("undo").onclick = callPython;
 document.getElementById("redo").onclick = callPython;
 document.getElementById("start").onclick = callPython;
 
+$("#maze").show();
+$("#GameBoardCanvas").hide();
+
+
 
 function callPython(){
 	console.log(this.id);
@@ -13,15 +17,21 @@ function callPython(){
 
 	if (this.id == "camera"){
 		document.getElementById("maze").src = "/video_feed";
+		$("#maze").show();
+		$("#GameBoardCanvas").hide();
 	}
 
 	if (this.id == "start"){
 		document.getElementById("maze").src = "https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966";
-	    //$("#Pimage").show();
+	    $("#maze").show();
+	    $("#GameBoardCanvas").hide();
 	}
 
 	if (this.id == "edit"){
-		document.getElementById("maze").src = "/static/image.jpg";
+
+		//document.getElementById("maze").src = "/static/jeroen-vector.png";
+        $("#GameBoardCanvas").show();
+        $("#maze").hide();
 
 	}
 

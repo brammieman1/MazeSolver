@@ -1,5 +1,6 @@
 import gen as gen
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, jsonify
+import picture as pic
 from camera_pi import Camera
 # hoi
 app = Flask(__name__)
@@ -28,6 +29,28 @@ def gen(camera):
 def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/data')
+def data():
+
+    mazeArray = pic.getArray()
+#     print("NOW THE MAZE SHOULD BE PRINTED")
+ #    print(list(mazeArray))
+    return jsonify({'results': mazeArray})
+
+  #   return jsonify({'results': [
+    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+   #  [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+     #[ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+#     [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+ #    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+ #    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+ #    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+ #    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+ #    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+ #    [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+ #    ]})
 
 
 @app.route('/<cmd>')
