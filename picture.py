@@ -9,3 +9,5 @@ with picamera.PiCamera() as camera:
     output = np.empty((240,320,3), dtype = np.uint8)
     camera.capture(output,'rgb')
     print(output)
+    outputnew = binarize_array(output,75)
+    print(outputnew)
