@@ -2,6 +2,7 @@ import time
 import picamera
 import numpy as np
 import BlackWhite2
+from PIL import Image
 
 with picamera.PiCamera() as camera:
     camera.resolution = (320,240)
@@ -11,5 +12,7 @@ with picamera.PiCamera() as camera:
     camera.color_effects = (128,128)
     camera.capture(output, 'rgb')
     print(output)
+    img = Image.fromarray(output, 'RGB')
+    img.save('my.png')
     outputnew = BlackWhite2.binarize_array(output, 75)
     print(outputnew)
