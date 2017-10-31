@@ -9,9 +9,9 @@ wiringpi.wiringPiSPISetup(SPIchannel, SPIspeed)
 count = 0
 
 while (True):
-    prefix = chr(63)   # 63 is send something back. 85 is only send.
+#    prefix = str(0)   # 63 is send something back. 85 is only send.
     sendData = chr(85)  # will send ONE bytes, a byte 1
-    recvData = wiringpi.wiringPiSPIDataRW(SPIchannel, prefix + sendData)
+    recvData = wiringpi.wiringPiSPIDataRW(SPIchannel, sendData) # prefix +
     count = count + 1
     time.sleep(1)
     print(count)
