@@ -34,7 +34,7 @@ def video_feed():
 @app.route('/data')
 def data():
 
-    mazeArray = pic.getArray()
+    mazeArray = pic.getArray().tolist()
     print(mazeArray)
     return jsonify({'results': mazeArray})
 
