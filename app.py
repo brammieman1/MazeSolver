@@ -5,6 +5,8 @@ from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
+cam = None
+
 CAPTURE, TRASH, START, RESET = "capture", "trash", "start", "reset"
 AVAILABLE_COMMANDS = {
     'Capture': CAPTURE,
@@ -27,11 +29,14 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen(Camera()),
+    global cam
+    cam = Camera
+    return Response(gen(cam),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/snapshot')
 def snapshot():
+    cam.close()
     print("I AM GOING TO TAKE A PICTURE BE WARNED")
     snapshot = pfun.picture();
 

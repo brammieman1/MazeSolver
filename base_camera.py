@@ -102,3 +102,9 @@ class BaseCamera(object):
                 print('Stopping camera thread due to inactivity.')
                 break
         BaseCamera.thread = None
+
+    @classmethod
+    def close(cls):
+        cls.frames().close()
+        BaseCamera.thread = None
+        print("closed")
