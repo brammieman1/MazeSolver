@@ -43,7 +43,6 @@ def snapshot():
 @app.route('/data')
 def data():
     mazeArray = pfun.convert().tolist()
-    print(mazeArray)
     return jsonify({'results': mazeArray})
 
     # return jsonify({'results': [
