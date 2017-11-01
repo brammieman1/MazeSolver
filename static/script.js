@@ -15,8 +15,9 @@ $("#load").hide();
 function callPython(){
 	console.log(this.id);
 
-
 	if (this.id == "camera"){
+	    document.getElementById("maze").src = "/static/loadingcam.png";
+
 		document.getElementById("maze").src = "/video_feed";
 		$("#maze").show();
 		$("#GameBoardCanvas").hide();
@@ -25,11 +26,13 @@ function callPython(){
 	}
 
 	if (this.id == "picture"){
-        document.getElementById("maze").src = "/static/wait.jpg";
+        document.getElementById("maze").src = "/";
+        //show loading
+        $("#load").show();
 
-	    $("#maze").show();
+       //hide all
+        $("#maze").hide();
 		$("#GameBoardCanvas").hide();
-		$("#load").hide();
 		$("#startMsg").hide();
 
 	    //get the picture taken
@@ -38,6 +41,8 @@ function callPython(){
             data = snapshot.snapshot;
             console.log(data);
             document.getElementById("maze").src = data;
+            $("#load").hide();
+            $("#maze").show();
         })
 
 	}

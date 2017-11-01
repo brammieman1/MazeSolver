@@ -6,7 +6,7 @@ import numpy as np
 import BlackWhite2
 from PIL import Image
 
-output = 'output.jpg'
+output = '/static/images/output.jpg'
 
 def picture():
    with picamera.PiCamera() as camera:
