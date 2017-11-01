@@ -1,7 +1,7 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify
-import picture as pic
-from camera_pi import Camera
+# import picture as pic
+# from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
@@ -30,14 +30,14 @@ def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('/snapshot')
+def snapshot():
+    pic.takePicture()
 
 @app.route('/data')
 def data():
-
     mazeArray = pic.getArray().tolist()
     print(mazeArray)
-#     print("NOW THE MAZE SHOULD BE PRINTED")
- #    print(list(mazeArray))
     return jsonify({'results': mazeArray})
 
   #   return jsonify({'results': [

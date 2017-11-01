@@ -14,39 +14,46 @@
 
 <body>
 <div class="jumbotron text-center">
-  <h1>Maze Solver Web Interface v1.1</h1>
+  <h1>Maze Solver Web Interface v1.3</h1>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1" id="canvasSize">
 
-		<!--<canvas id="GameBoardCanvas" width="400px" height="400px"></canvas>-->
+		<div id="load" class="loader"></div>
+
 		<canvas id="GameBoardCanvas" width="100%" ></canvas>
-	  <img class="img-responsive" id="maze" width="90%" src="https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966" alt="Animation">
+
+	  	<img class="img-responsive" id="maze" width="90%" src="https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966" alt="Animation">
 
 	</div>
     <div class="col-sm-3">
 	<div class="jumbotron text-center" id="control-panel">
 		<div class="row">
-			<div class="col-xs-12">
-				<div class="btn-group">
-				  <button type="button" class="btn btn-default" id="undo">
-				  <span class="glyphicon glyphicon-triangle-left"></span> Undo
-				  </button>
-				  <button type="button" class="btn btn-default" id="redo">
-				  Redo <span class="glyphicon glyphicon-triangle-right"></span>
-				  </button>
-				</div>
-			</div>
+			<!--<div class="col-xs-12">-->
+				<!--<div class="btn-group">-->
+				  <!--<button type="button" class="btn btn-default" id="undo">-->
+				  <!--<span class="glyphicon glyphicon-triangle-left"></span> Undo-->
+				  <!--</button>-->
+				  <!--<button type="button" class="btn btn-default" id="redo">-->
+				  <!--Redo <span class="glyphicon glyphicon-triangle-right"></span>-->
+				  <!--</button>-->
+				<!--</div>-->
+			<!--</div>-->
 			<div class="col-xs-6">
 				<button type="button" class="btn btn-primary btn-lg" id="camera">
 				<span class="glyphicon glyphicon-facetime-video"></span>
 				</button>
 			</div>
 			<div class="col-xs-6">
-				<button type="button" class="btn btn-primary btn-lg" id="trash">
-				<span class="glyphicon glyphicon-trash"></span>
+				<button type="button" class="btn btn-primary btn-lg" id="picture">
+				<span class="glyphicon glyphicon-camera"></span>
+				</button>
+			</div>
+			<div class="col-xs-6">
+				<button type="button" class="btn btn-primary btn-lg" id="convert">
+				<span class="glyphicon glyphicon-refresh"></span>
 				</button>
 			</div>
 			<div class="col-xs-6">
@@ -55,9 +62,26 @@
 				</button>
 			</div>
 			<div class="col-xs-6">
-				<button type="button" class="btn btn-primary btn-lg" id="erase">
-				<span class="glyphicon glyphicon-erase"></span>
+				<button type="button" class="btn btn-primary btn-lg" id="save">
+				<span class="glyphicon glyphicon-floppy-save"></span>
 				</button>
+			</div>
+			<div class="col-xs-6">
+				<button type="button" class="btn btn-primary btn-lg" id="delete">
+				<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</div>
+			<div class="col-xs-12">
+				<div class="dropdown">
+					<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">History
+					<span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<li><a href="#">DB connection fail</a></li>
+						<li><a href="#">DB connection fail</a></li>
+						<li><a href="#">DB connection fail</a></li>
+						<li><a href="#">DB connection fail</a></li>
+					</ul>
+				</div>
 			</div>
 			<div class="col-xs-12">
 				<div class="dropdown">

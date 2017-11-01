@@ -23,6 +23,17 @@ var player = {
 //Draw the game board
 function draw(){
 
+//check if board has data other wise show loading image
+     if (board.length > 0 ){
+        $("#GameBoardCanvas").show();
+        $("#load").hide();
+     } else {
+        $("#GameBoardCanvas").hide();
+        $("#load").show();
+     }
+
+
+
     // set canvas properties
     //var width = canvas.width();
 
