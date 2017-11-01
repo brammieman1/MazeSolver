@@ -1,7 +1,7 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify
-# import functions as pfun
-# from camera_pi import Camera
+import functions as pfun
+from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
