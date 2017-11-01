@@ -1,7 +1,7 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify
-import functions as pfun
-from camera_pi import Camera
+# import functions as pfun
+# from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
@@ -33,7 +33,8 @@ def video_feed():
 @app.route('/snapshot')
 def snapshot():
     print("I AM GOING TO TAKE A PICTURE BE WARNED")
-    pfun.picture()
+    pfun.picture();
+    return "ok"
 
     #add return
 
@@ -41,22 +42,22 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    mazeArray = pfun.convert("/output.jpg").toList()
-    print(mazeArray)
-    return jsonify({'results': mazeArray})
+    # mazeArray = pfun.convert().toList()
+    # print(mazeArray)
+    # return jsonify({'results': mazeArray})
 
-  #   return jsonify({'results': [
-    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-   #  [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-     #[ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-#     [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
- #    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
- #    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
- #    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
- #    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
- #    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
- #    [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
- #    ]})
+    return jsonify({'results': [
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+     [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    ]})
 
 
 @app.route('/<cmd>')

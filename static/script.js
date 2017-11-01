@@ -25,17 +25,17 @@ function callPython(){
 	if (this.id == "picture"){
 	    //get the picture taken
 	    $.get('/snapshot');
-
-		document.getElementById("maze").src = "/snapshot";
+		document.getElementById("maze").src = "output.jpg";
 		$("#maze").show();
 		$("#GameBoardCanvas").hide();
 		$("#load").hide();
 	}
 
 	if (this.id == "convert"){
-        $("#GameBoardCanvas").hide();
+	    $("#GameBoardCanvas").hide();
         $("#maze").hide();
         $("#load").show();
+	    getMaze()
 	}
 
 
