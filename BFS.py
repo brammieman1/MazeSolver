@@ -4,7 +4,7 @@ import numpy as np
 import BlackWhite2 as bw
 
 start = (170,170)
-end = (171,171)
+end = (175,175)
 
 def isZero(value):
     if value == 0:
@@ -26,7 +26,6 @@ def BFS(start,end, maze):
             return path
 
         for adjacent in getadjacent(current):
-            #print(maze)
             x,y = adjacent
             if isZero(maze[x][y]):
                 maze[x][y] = 2
@@ -38,15 +37,16 @@ def BFS(start,end, maze):
 
 
 if __name__ == "__main__":
-    #anothermaze = bw.binarize_image('test.jpg',75)
+    anothermaze = bw.binarize_image('test.jpg',150)
     #print(anothermaze)
     numpymaze = np.array([(1, 1, 1, 1, 1), (1, 0, 0, 0, 1), (1, 1, 0, 1, 1), (1, 0, 0, 0, 1), (1, 1, 1, 1, 1)])
 
-    path = BFS(start,end,numpymaze)
+    path = BFS(start,end,anothermaze)
 
     for position in path:
+          print(position)
           x,y = position
-          numpymaze[x][y] = 3
+          anothermaze[x][y] = 3
 
-    print(numpymaze.tolist())
+    print(anothermaze.tolist())
     print("queued")
