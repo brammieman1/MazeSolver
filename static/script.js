@@ -26,7 +26,7 @@ function callPython(){
 	    //get the picture taken
 	    $.get('/snapshot');
 
-		document.getElementById("maze").src = "/picture";
+		document.getElementById("maze").src = "/snapshot";
 		$("#maze").show();
 		$("#GameBoardCanvas").hide();
 		$("#load").hide();

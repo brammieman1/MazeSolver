@@ -1,6 +1,6 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify
-import picture as pic
+import functions as pfun
 from camera_pi import Camera
 # hoi
 app = Flask(__name__)
@@ -32,12 +32,16 @@ def video_feed():
 
 @app.route('/snapshot')
 def snapshot():
-    pic.takePicture()
+    print("I AM GOING TO TAKE A PICTURE BE WARNED")
+    pfun.picture()
+
+    #add return
+
+
 
 @app.route('/data')
 def data():
-    print("I AM GOING TO TAKE A PICTURE BE WARNED")
-    mazeArray = pic.getArray().toList()
+    mazeArray = pfun.convert("/output.jpg").toList()
     print(mazeArray)
     return jsonify({'results': mazeArray})
 
