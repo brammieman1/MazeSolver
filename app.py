@@ -33,8 +33,8 @@ def video_feed():
 
 @app.route('/data')
 def data():
-
-    mazeArray = pic.getArray().tolist()
+    print("I AM GOING TO TAKE A PICTURE BE WARNED")
+    mazeArray = pic.getArray().toList()
     print(mazeArray)
 #     print("NOW THE MAZE SHOULD BE PRINTED")
  #    print(list(mazeArray))
