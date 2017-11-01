@@ -23,12 +23,19 @@ function callPython(){
 	}
 
 	if (this.id == "picture"){
-	    //get the picture taken
-	    $.get('/snapshot');
-		document.getElementById("maze").src = "output.jpg";
-		$("#maze").show();
+
+	    $("#maze").show();
 		$("#GameBoardCanvas").hide();
 		$("#load").hide();
+
+	    //get the picture taken
+	    var getSnap = $.get('/snapshot');
+	    getSnap.done(function(snapshot){
+            data = snapshot.snapshot;
+            console.log(data);
+            document.getElementById("maze").src = data;
+        }
+
 	}
 
 	if (this.id == "convert"){

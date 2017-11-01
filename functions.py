@@ -14,6 +14,7 @@ def picture():
        time.sleep(2)
        camera.capture(output)
        print('picture taken')
+       return output
 
 
 def convert(image):
