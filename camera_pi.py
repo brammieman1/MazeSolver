@@ -3,6 +3,7 @@ import time
 import picamera
 from base_camera import BaseCamera
 
+output = './static/images/output.jpg'
 
 class Camera(BaseCamera):
     @staticmethod
@@ -21,3 +22,14 @@ class Camera(BaseCamera):
                 # reset stream for next frame
                 stream.seek(0)
                 stream.truncate()
+
+    @staticmethod
+    def takepicture():
+        BaseCamera.close()
+        print('basdjfkasdjfkasdjfalksdfjkasdjfl')
+        with picamera.PiCamera() as camera:
+            camera.framerate = 24
+            time.sleep(2)
+            camera.capture(output)
+            print('picture taken')
+            return output

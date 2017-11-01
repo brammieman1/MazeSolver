@@ -29,17 +29,14 @@ def gen(camera):
 
 @app.route('/video_feed')
 def video_feed():
-    global cam
-    cam = Camera
-    return Response(gen(cam),
+    return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/snapshot')
 def snapshot():
     cam.close()
     print("I AM GOING TO TAKE A PICTURE BE WARNED")
-    snapshot = pfun.picture();
-
+    snapshot = Camera.picture()
     return jsonify({'snapshot': snapshot })
     #add return
 
