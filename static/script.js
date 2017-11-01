@@ -6,6 +6,7 @@ document.getElementById("save").onclick = callPython;
 document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
 
+$("#startMsg").show();
 $("#maze").hide();
 $("#GameBoardCanvas").hide();
 $("#load").hide();
@@ -20,6 +21,7 @@ function callPython(){
 		$("#maze").show();
 		$("#GameBoardCanvas").hide();
 		$("#load").hide();
+		$("#startMsg").hide();
 	}
 
 	if (this.id == "picture"){
@@ -27,6 +29,7 @@ function callPython(){
 	    $("#maze").show();
 		$("#GameBoardCanvas").hide();
 		$("#load").hide();
+		$("#startMsg").hide();
 
 	    //get the picture taken
 	    var getSnap = $.get('/snapshot');
@@ -34,13 +37,14 @@ function callPython(){
             data = snapshot.snapshot;
             console.log(data);
             document.getElementById("maze").src = data;
-        }
+        })
 
 	}
 
 	if (this.id == "convert"){
 	    $("#GameBoardCanvas").hide();
         $("#maze").hide();
+        $("#startMsg").hide();
         $("#load").show();
 	    getMaze()
 	}
@@ -51,6 +55,7 @@ function callPython(){
 	    $("#maze").show();
 	    $("#GameBoardCanvas").hide();
 	    $("#load").hide();
+	    $("#startMsg").hide();
 	}
 
 
