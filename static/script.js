@@ -25,6 +25,7 @@ function callPython(){
 	}
 
 	if (this.id == "picture"){
+        document.getElementById("maze").src = "/static/wait.jpg";
 
 	    $("#maze").show();
 		$("#GameBoardCanvas").hide();

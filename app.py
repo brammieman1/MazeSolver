@@ -34,7 +34,6 @@ def video_feed():
 def snapshot():
     print("I AM GOING TO TAKE A PICTURE BE WARNED")
     snapshot = pfun.picture();
-    return "ok"
 
     return jsonify({'snapshot': snapshot })
     #add return
