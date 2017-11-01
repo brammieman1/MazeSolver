@@ -2,6 +2,7 @@ import gen as gen
 from flask import Flask, render_template, Response, jsonify
 import functions as pfun
 from camera_pi import Camera
+import base_camera as base
 # hoi
 app = Flask(__name__)
 
@@ -32,10 +33,9 @@ def video_feed():
 
 @app.route('/snapshot')
 def snapshot():
+    base.BaseCamera.thread.stop()
     print("I AM GOING TO TAKE A PICTURE BE WARNED")
     snapshot = pfun.picture();
-    return "ok"
-
     return jsonify({'snapshot': snapshot })
     #add return
 
