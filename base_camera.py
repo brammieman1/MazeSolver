@@ -61,8 +61,9 @@ class BaseCamera(object):
     def __init__(self):
         """Start the background camera thread if it isn't running yet."""
         if BaseCamera.thread is None:
+            self.stopped = False
             BaseCamera.last_access = time.time()
-
+	    
             # start background frame thread
             BaseCamera.thread = threading.Thread(target=self._thread)
             BaseCamera.thread.start()
