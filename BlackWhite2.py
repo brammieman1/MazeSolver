@@ -18,7 +18,7 @@ def binarize_image(img_path, threshold):
     height, width = image_file.size
     image = binarize_array(image, threshold)
     #imsave(target_path, image)
-    listImage = image.tolist()
+    listImage = image
     return listImage
 
 def binarize_array(numpy_array, threshold=75):

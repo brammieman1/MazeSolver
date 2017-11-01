@@ -40,7 +40,7 @@ function callPython(){
 	    getSnap.done(function(snapshot){
             data = snapshot.snapshot;
             console.log(data);
-            document.getElementById("maze").src = data;
+            document.getElementById("maze").src = "/static/images/output.jpg?t=" + new Date().getTime();
             $("#load").hide();
             $("#maze").show();
         })

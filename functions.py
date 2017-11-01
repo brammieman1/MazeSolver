@@ -6,7 +6,7 @@ import numpy as np
 import BlackWhite2
 from PIL import Image
 
-output = '/static/images/output.jpg'
+output = './static/images/output.jpg'
 
 def picture():
    with picamera.PiCamera() as camera:
@@ -17,5 +17,5 @@ def picture():
        return output
 
 
-def convert(image):
+def convert():
    return BlackWhite2.binarize_image(output, 75)
