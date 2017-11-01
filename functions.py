@@ -9,7 +9,7 @@ from PIL import Image
 output = './static/images/output.jpg'
 
 def picture():
-   time.sleep(3)
+   time.sleep(1)
    with picamera.PiCamera() as camera:
        camera.framerate = 24
        time.sleep(2)
