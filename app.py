@@ -5,8 +5,6 @@ from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
-cam = None
-
 CAPTURE, TRASH, START, RESET = "capture", "trash", "start", "reset"
 AVAILABLE_COMMANDS = {
     'Capture': CAPTURE,
@@ -34,9 +32,9 @@ def video_feed():
 
 @app.route('/snapshot')
 def snapshot():
-    cam.close()
+    Camera.StopPreview()
     print("I AM GOING TO TAKE A PICTURE BE WARNED")
-    snapshot = Camera.picture()
+    snapshot = pfun.picture()
     return jsonify({'snapshot': snapshot })
     #add return
 

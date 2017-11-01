@@ -56,6 +56,7 @@ class BaseCamera(object):
     frame = None  # current frame is stored here by background thread
     last_access = 0  # time of last client access to the camera
     event = CameraEvent()
+    stopped = False
 
     def __init__(self):
         """Start the background camera thread if it isn't running yet."""
@@ -97,14 +98,11 @@ class BaseCamera(object):
 
             # if there hasn't been any clients asking for frames in
             # the last 10 seconds then stop the thread
-            if time.time() - BaseCamera.last_access > 10:
+            if (time.time() - BaseCamera.last_access > 10) or BaseCamera.stopped:
                 frames_iterator.close()
                 print('Stopping camera thread due to inactivity.')
                 break
         BaseCamera.thread = None
-
-    @classmethod
-    def close(cls):
-        cls.frames().close()
-        BaseCamera.thread = None
-        print("closed")
+    @staticmethod
+    def StopPreview():
+        BaseCamera.stopped = True
