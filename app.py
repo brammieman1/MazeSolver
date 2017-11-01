@@ -1,7 +1,7 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify
-# import picture as pic
-# from camera_pi import Camera
+import picture as pic
+from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
@@ -36,7 +36,8 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    mazeArray = pic.getArray().tolist()
+    print("I AM GOING TO TAKE A PICTURE BE WARNED")
+    mazeArray = pic.getArray().toList()
     print(mazeArray)
     return jsonify({'results': mazeArray})
 
