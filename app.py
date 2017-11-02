@@ -38,9 +38,7 @@ def get_post_javascript_data():
     start = (startx,starty)
     end = (endx,endy)
     mazeArray = np.array(maze)
-    mazeArray[startx][starty] = 0
-    mazeArray[endx][endy] = 0
-    path = bfs.BFS(start, end, maze)
+    path = bfs.BFS(start, end, mazeArray)
     bfs.drawpath(path)
     print(maze)
 
