@@ -45,7 +45,7 @@ def arrayCoverting(string):
     matrixAr = []
     mystring = string
     b = mystring.replace("[[", "").replace("]]", "")  # to remove head [[ and tail ]]
-    for line in b.split('], ['):
+    for line in b.split('],['):
         row = list(
             map(int, line.split(',')))  # map = to convert the number from string (some has also space ) to integer
         matrixAr.append(row)
@@ -57,6 +57,8 @@ if __name__ == "__main__":
     #print(anothermaze)
     numpymaze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
     print(numpymaze)
+
+    print(arrayCoverting("[[0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1,1,0,0],[1,0,1,0,0,0,0,0,1,0,0],[0,0,0,0,1,1,1,0,1,0,0],[0,1,1,0,0,0,1,0,1,0,0],[0,0,1,1,1,1,1,0,1,0,0],[1,0,1,0,0,0,1,0,1,0,0],[1,0,1,0,1,0,1,0,0,0,0],[1,0,1,0,1,0,0,1,1,0,0],[1,0,1,0,1,1,0,0,0,0,0]]"))
 
     #path = BFS(start,end,numpymaze)
     #drawpath(path);
