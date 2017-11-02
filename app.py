@@ -3,6 +3,7 @@ from flask import Flask, render_template, Response, jsonify, request
 import functions as pfun
 from camera_pi import Camera
 import BFS as bfs
+import numpy as np
 # hoi
 app = Flask(__name__)
 
@@ -36,9 +37,9 @@ def get_post_javascript_data():
     print("i am alive")
     start = (startx,starty)
     end = (endx,endy)
-
-    maze[startx][starty] = 0
-    maze[endx][endy] = 0
+    mazeArray = np.array(maze)
+    mazeArray[startx][starty] = 0
+    mazeArray[endx][endy] = 0
     path = bfs.BFS(start, end, maze)
     bfs.drawpath(path)
     print(maze)
