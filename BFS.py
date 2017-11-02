@@ -35,18 +35,18 @@ def BFS(start,end, maze):
 
     print("Queue is full! no answer")
 
+def drawpath(path): #first you need to call the BFS function before drawpath()
+    for position in path:
+        print(position)
+        x,y = position
+        anothermaze[x][y] = 3
+
 
 if __name__ == "__main__":
     anothermaze = bw.binarize_image('test.jpg',150)
     #print(anothermaze)
     numpymaze = np.array([(1, 1, 1, 1, 1), (1, 0, 0, 0, 1), (1, 1, 0, 1, 1), (1, 0, 0, 0, 1), (1, 1, 1, 1, 1)])
-
     path = BFS(start,end,anothermaze)
-
-    for position in path:
-          print(position)
-          x,y = position
-          anothermaze[x][y] = 3
-
+    drawpath(path);
     print(anothermaze.tolist())
     print("queued")
