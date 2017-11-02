@@ -1,7 +1,8 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify, request
-import functions as pfun
-from camera_pi import Camera
+import pickle
+# import functions as pfun
+# from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 # hoi
@@ -37,10 +38,9 @@ def get_post_javascript_data():
     print("i am alive")
     start = (startx,starty)
     end = (endx,endy)
-    mazeArray = np.array(maze)
-    path = bfs.BFS(start, end, mazeArray)
+    path = bfs.BFS(start, end, maze)
     bfs.drawpath(path)
-    print(maze)
+    print("de vogel is gevolgen")
 
     # return json.loads(jsdata)[0]
     return'Hello, World!'
