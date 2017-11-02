@@ -1,7 +1,7 @@
 import gen as gen
-from flask import Flask, render_template, Response, jsonify,json,request
-# import functions as pfun
-# from camera_pi import Camera
+from flask import Flask, render_template, Response, jsonify
+import functions as pfun
+from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
@@ -56,22 +56,21 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    # mazeArray = pfun.convert().tolist()
-    # print(mazeArray)
-    # return jsonify({'results': mazeArray})
+    mazeArray = pfun.convert().tolist()
+    return jsonify({'results': mazeArray})
 
-    return jsonify({'results': [
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
-    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    [ 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
-    ]})
+    # return jsonify({'results': [
+    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    #  [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    # [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    # [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    # [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    # [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    # ]})
 
 
 @app.route('/<cmd>')
