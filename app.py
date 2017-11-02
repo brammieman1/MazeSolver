@@ -35,14 +35,18 @@ def get_post_javascript_data():
     endx = int(request.form['endx'])
     endy = int(request.form['endy'])
     print("i am alive")
-    start = (startx,starty)
-    end = (endx,endy)
+    start = (starty,startx)
+    end = (endy,endx)
     print(maze)
+    print(start,end)
     resultaat = bfs.BFS(start, end, bfs.arrayCoverting(maze))
     print("de vogel is gevolgen")
     print(resultaat)
-    # return json.loads(jsdata)[0]
-    return'Hello, World!'
+
+    solvedArray = resultaat.tolist()
+    return jsonify({'solutions': solvedArray})
+
+
 
 
 

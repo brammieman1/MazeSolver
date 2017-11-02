@@ -16,6 +16,7 @@ $("#grid").hide();
 $("#load").hide();
 
 var editMode = 0;
+var solutionBlock = false;
 
 function callPython(){
 	console.log(this.id);
@@ -74,34 +75,33 @@ function callPython(){
         $("#startMsg").hide();
         $("#load").show();
 	    getMaze();
+
+	    document.getElementById("edit").disabled = false;
+        document.getElementById("startp").disabled = false;
+        document.getElementById("endp").disabled = false;
+        document.getElementById("start").disabled = false;
+        solutionBlock = false;
 	}
 
 
 	if (this.id == "start"){
 	    editmode = 0;
 
+
 	    if((typeof endCoordinate !== 'undefined')&& (typeof startCoordinate !== 'undefined')){
+        $("#grid").hide();
+        $("#maze").hide();
+        $("#startMsg").hide();
+        $("#load").show();
+        getSolution();
 
-        console.log("hier komt de data");
-	        console.log(board);
-            var sendmaze = board;
+        solutionBlock = true;
+        document.getElementById("edit").disabled = true;
+        document.getElementById("startp").disabled = true;
+        document.getElementById("endp").disabled = true;
+        document.getElementById("start").disabled = true;
 
-            sendmaze[startCoordinate["y"]][startCoordinate["x"]]= 0;
-            sendmaze[endCoordinate["y"]][endCoordinate["x"]]= 0;
 
-	    $.post( "/sendMaze", {
-            maze: JSON.stringify(sendmaze),
-            startx: startCoordinate["x"],
-            starty: startCoordinate["y"],
-            endx: endCoordinate["x"],
-            endy: endCoordinate["y"],
-            });
-
-	    document.getElementById("maze").src = "https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966";
-	    $("#maze").show();
-	    $("#grid").hide();
-	    $("#load").hide();
-	    $("#startMsg").hide();
 	    } else{
 	    alert("Select start and end point")
 	    }

@@ -36,6 +36,30 @@ function getMaze(){
     });
 }
 
+function getSolution(){
+    var sendmaze = board;
+    sendmaze[startCoordinate["y"]][startCoordinate["x"]]= 0;
+    sendmaze[endCoordinate["y"]][endCoordinate["x"]]= 0;
+
+    var getSolution = $.post( "/sendMaze", {
+        maze: JSON.stringify(sendmaze),
+        startx: startCoordinate["x"],
+        starty: startCoordinate["y"],
+        endx: endCoordinate["x"],
+        endy: endCoordinate["y"],
+    });
+
+
+    getSolution.done(function(solutions){
+        data = solutions.solutions;
+        board = data;
+        //Draw the game board
+        draw();
+        //canvasElement.addEventListener("click", edit);
+    })
+
+}
+
 function setupCanvas(){
         width = ($("#grid").width());
         widthArray = board[0].length;
@@ -164,7 +188,7 @@ function edit(){
     //First check if edit mode is set
     console.log("editmode: "+editMode);
 
-    if (!editMode == 0){
+    if (!editMode == 0 && !solutionBlock){
         if (clickReady){
             if (editMode == 1){
                 var currentVal = board[yblock][xblock]
