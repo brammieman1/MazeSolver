@@ -84,10 +84,13 @@ function callPython(){
 
         console.log("hier komt de data");
 	        console.log(board);
-            var sendmaze;
+            var sendmaze = board;
+
+            sendmaze[startCoordinate["y"]][startCoordinate["x"]]= 0;
+            sendmaze[endCoordinate["y"]][endCoordinate["x"]]= 0;
 
 	    $.post( "/sendMaze", {
-            maze: JSON.stringify(board),
+            maze: JSON.stringify(sendmaze),
             startx: startCoordinate["x"],
             starty: startCoordinate["y"],
             endx: endCoordinate["x"],
