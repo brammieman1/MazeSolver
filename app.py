@@ -29,13 +29,14 @@ def gen(camera):
 @app.route('/sendMaze', methods = ['POST'])
 def get_post_javascript_data():
     maze = request.form['maze']
-    startx = request.form['startx']
-    starty = request.form['starty']
-    endx = request.form['endx']
-    endy = request.form['endy']
+    startx = int(request.form['startx'])
+    starty = int(request.form['starty'])
+    endx = int(request.form['endx'])
+    endy = int(request.form['endy'])
     print("i am alive")
     start = (startx,starty)
     end = (endx,endy)
+
     maze[startx][starty] = 0
     maze[endx][endy] = 0
     path = bfs.BFS(start, end, maze)
