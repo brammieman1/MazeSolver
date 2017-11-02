@@ -41,13 +41,25 @@ def drawpath(path): #first you need to call the BFS function before drawpath()
         x,y = position
         anothermaze[x][y] = 3
 
+def arrayCoverting(string):
+    matrixAr = []
+    mystring = string
+    b = mystring.replace("[[", "").replace("]]", "")  # to remove head [[ and tail ]]
+    for line in b.split('], ['):
+        row = list(
+            map(int, line.split(',')))  # map = to convert the number from string (some has also space ) to integer
+        matrixAr.append(row)
+    numpyArray = np.array(matrixAr)
+    return numpyArray
 
 if __name__ == "__main__":
     anothermaze = bw.binarize_image('test.jpg',150)
     #print(anothermaze)
     numpymaze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
-    path = BFS(start,end,numpymaze)
-    drawpath(path);
     print(numpymaze)
-    print(numpymaze.tolist())
-    print("queued")
+
+    #path = BFS(start,end,numpymaze)
+    #drawpath(path);
+    #print(numpymaze)
+    #print(numpymaze.tolist())
+    #print("queued")
