@@ -7,6 +7,16 @@ window.addEventListener('mousemove', mousePos, false);
 
 var canvas = $('#GameBoardCanvas');
 var canvasElement = document.getElementById("GameBoardCanvas");
+var space = $("#grid");
+
+
+//
+//function setXL(){
+//var canvas = $('#GameBoardCanvasXL');
+//var canvasElement = document.getElementById("GameBoardCanvasXL");
+//console.log("Opening xl view");
+//}
+
 var data = [];
 var board = [];
 var width;
@@ -21,6 +31,7 @@ var endCoordinate;
 var startCoordinate;
 
 function getMaze(){
+    XL = false;
     //getting the data from pyhton
     console.log("The python is now asked to return the array")
     var getData = $.get('/data');
@@ -36,7 +47,32 @@ function getMaze(){
     });
 }
 
+function getMazeSM(){
+    XL = false;
+    canvas = $('#GameBoardCanvas');
+    canvasElement = document.getElementById("GameBoardCanvas");
+    space = $("#grid");
+
+    //Draw the game board
+    draw();
+    canvasElement.addEventListener("click", edit);
+}
+
+function getMazeXL(){
+    XL = true;
+    canvas = $('#GameBoardCanvasXL');
+    canvasElement = document.getElementById("GameBoardCanvasXL");
+    space = $("body");
+
+    console.log(space.width());
+    //Draw the game board
+    draw();
+    canvasElement.addEventListener("click", edit);
+}
+
+
 function getSolution(){
+    XL = false;
     var sendmaze = board;
     sendmaze[startCoordinate["y"]][startCoordinate["x"]]= 0;
     sendmaze[endCoordinate["y"]][endCoordinate["x"]]= 0;
@@ -61,16 +97,21 @@ function getSolution(){
 }
 
 function setupCanvas(){
-        width = ($("#grid").width());
+        if(XL){
+        width = ((space.width())/100)*88;
+        console.log("bingobingo");
+        } else{
+        width = (space.width());
+        }
         widthArray = board[0].length;
         heightArray = board.length;
         blockSize = width/widthArray;
         height = blockSize * heightArray;
 
-        console.log(width,widthArray,heightArray,blockSize,height)
+        //console.log(width,widthArray,heightArray,blockSize,height)
 
-        document.getElementById("GameBoardCanvas").height = height;
-        document.getElementById("GameBoardCanvas").width = width;
+        canvasElement.height = height;
+        canvasElement.width = width;
 //        document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
 }
 
@@ -171,8 +212,8 @@ function getCoordinates(canvasElement, evt) {
             xblock = Math.floor(mx/mappingx);
             yblock = Math.floor(my/mappingy);
 
-            console.log("x: "+xblock);
-            console.log("y: "+yblock);
+            //console.log("x: "+xblock);
+            //console.log("y: "+yblock);
 
 //            console.log("x block: "+xblock);
 //            console.log("y block: "+yblock);

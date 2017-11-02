@@ -6,6 +6,8 @@
 #grid{
 	padding-right: 35px;
 	padding-left: 35px;
+	padding-bottom: 80px;
+	padding-top: 35px;
 }
 
 .btn-primary{
@@ -31,8 +33,21 @@
 #startp{
     margin-top: 20px;
     float: right;
-
 }
+
+#zoom{
+    margin-top: 20px;
+    float: center;
+}
+
+#cbut{
+    padding-left:10px;
+}
+
+.modal-lg {
+    width: 90%;
+}
+
 
 .btn-info {
 	padding: 10px;
@@ -74,6 +89,17 @@
   //  background: black;
 
 }
+
+#GameBoardCanvasXL {
+
+   // border: solid black;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+  //  background: black;
+
+}
+
 
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */

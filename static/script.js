@@ -7,8 +7,14 @@ document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
 document.getElementById("startp").onclick = callPython;
 document.getElementById("endp").onclick = callPython;
-document.getElementById("convert").disabled = true;
-//document.getElementById("convert").disabled = false;
+document.getElementById("zoom").onclick = callPython;
+//document.getElementById("convert").disabled = true;
+document.getElementById("convert").disabled = false;
+
+$('#myModal').on('hidden.bs.modal', function(e) {
+console.log("jana");
+getMazeSM();
+});
 
 $("#startMsg").show();
 $("#maze").hide();
@@ -17,6 +23,7 @@ $("#load").hide();
 
 var editMode = 0;
 var solutionBlock = false;
+var XL = false;
 
 function callPython(){
 	console.log(this.id);
@@ -43,6 +50,11 @@ function callPython(){
 
 	if (this.id == "endp"){
 	    editMode = -1;
+	}
+
+	if (this.id == "zoom"){
+	    editMode = 1;
+	    getMazeXL();
 	}
 
 	if (this.id == "picture"){
