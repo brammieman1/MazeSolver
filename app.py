@@ -37,12 +37,9 @@ def get_post_javascript_data():
     print("i am alive")
     start = (startx,starty)
     end = (endx,endy)
-    mazeArray = np.array(maze)
-    mazeArray[startx][starty] = 0
-    mazeArray[endx][endy] = 0
     path = bfs.BFS(start, end, maze)
     bfs.drawpath(path)
-    print(maze)
+    print("de vogel is gevolgen")
 
     # return json.loads(jsdata)[0]
     return'Hello, World!'
@@ -67,21 +64,21 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    mazeArray = pfun.convert().tolist()
-    return jsonify({'results': mazeArray})
+    # mazeArray = pfun.convert().tolist()
+    # return jsonify({'results': mazeArray})
 
-    # return jsonify({'results': [
-    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    #  [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    # [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-    # [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    # [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
-    # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    # [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
-    # ]})
+    return jsonify({'results': [
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+     [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    ]})
 
 
 @app.route('/<cmd>')
