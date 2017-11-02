@@ -22,6 +22,7 @@ function callPython(){
 	console.log(this.id);
 
 	if (this.id == "camera"){
+	    document.getElementById("convert").disabled = true;
 	    editMode = 0;
 	    document.getElementById("maze").src = "/static/loadingcam.png";
 		document.getElementById("maze").src = "/video_feed";
