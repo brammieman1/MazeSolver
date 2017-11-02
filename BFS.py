@@ -27,7 +27,7 @@ def BFS(start,end, maze):
                 print(position)
                 x, y = position
                 maze[x][y] = 3
-            return path
+            return maze
 
         for adjacent in getadjacent(current):
             x,y = adjacent
@@ -42,12 +42,6 @@ def BFS(start,end, maze):
 
 
 
-def drawpath(path): #first you need to call the BFS function before drawpath()
-    for position in path:
-        print(position)
-        x,y = position
-        anothermaze[x][y] = 3
-
 def arrayCoverting(string):
     matrixAr = []
     mystring = string
@@ -60,13 +54,14 @@ def arrayCoverting(string):
     return numpyArray
 
 if __name__ == "__main__":
-    anothermaze = bw.binarize_image('test.jpg',150)
-    #print(anothermaze)
-    numpymaze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
-    print(numpymaze)
+    # anothermaze = bw.binarize_image('test.jpg',150)
+    # #print(anothermaze)
+    # numpymaze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
+    # print(numpymaze)
 
-    print(arrayCoverting("[[0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1,1,0,0],[1,0,1,0,0,0,0,0,1,0,0],[0,0,0,0,1,1,1,0,1,0,0],[0,1,1,0,0,0,1,0,1,0,0],[0,0,1,1,1,1,1,0,1,0,0],[1,0,1,0,0,0,1,0,1,0,0],[1,0,1,0,1,0,1,0,0,0,0],[1,0,1,0,1,0,0,1,1,0,0],[1,0,1,0,1,1,0,0,0,0,0]]"))
-
+    puzzel = (arrayCoverting("[[1,1,1,1,1,1,1,1,1,1,1],[1,0,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,0,1],[1,0,1,0,0,0,0,0,1,0,1],[1,0,0,0,1,1,1,0,1,0,1],[1,1,1,0,0,0,1,0,1,0,1],[1,0,1,1,1,1,1,0,1,0,1],[1,0,1,0,0,0,1,0,1,0,1],[1,0,1,0,1,0,1,0,0,0,1],[1,0,1,0,1,0,0,1,1,0,1],[1,1,1,1,1,1,1,1,1,1,1]]"))
+    oplossing = BFS((1,1),(9,9),puzzel)
+    print(oplossing)
     #path = BFS(start,end,numpymaze)
     #drawpath(path);
     #print(numpymaze)
