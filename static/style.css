@@ -3,6 +3,11 @@
 	padding-left: 35px;
 }
 
+#grid{
+	padding-right: 35px;
+	padding-left: 35px;
+}
+
 .btn-primary{
 	margin-left: 0;
 	margin-right: 0;
@@ -16,6 +21,17 @@
 	padding: 10px;
 	font-size: 15px;
 	margin-bottom: 30px;
+}
+
+#endp{
+    margin-top: 20px;
+    float: left;
+}
+
+#startp{
+    margin-top: 20px;
+    float: right;
+
 }
 
 .btn-info {

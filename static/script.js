@@ -5,34 +5,53 @@ document.getElementById("edit").onclick = callPython;
 document.getElementById("save").onclick = callPython;
 document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
+document.getElementById("startp").onclick = callPython;
+document.getElementById("endp").onclick = callPython;
+//document.getElementById("convert").disabled = true;
+document.getElementById("convert").disabled = false;
 
 $("#startMsg").show();
 $("#maze").hide();
-$("#GameBoardCanvas").hide();
+$("#grid").hide();
 $("#load").hide();
 
+var editMode = 0;
 
 function callPython(){
 	console.log(this.id);
 
 	if (this.id == "camera"){
+	    editMode = 0;
 	    document.getElementById("maze").src = "/static/loadingcam.png";
-
 		document.getElementById("maze").src = "/video_feed";
 		$("#maze").show();
-		$("#GameBoardCanvas").hide();
+		$("#grid").hide();
 		$("#load").hide();
 		$("#startMsg").hide();
 	}
 
+
+	if (this.id == "edit"){
+	    editMode = 1;
+	}
+
+	if (this.id == "startp"){
+	    editMode = -2;
+	}
+
+	if (this.id == "endp"){
+	    editMode = -1;
+	}
+
 	if (this.id == "picture"){
+	    editMode = 0;
         document.getElementById("maze").src = "/";
         //show loading
         $("#load").show();
 
        //hide all
         $("#maze").hide();
-		$("#GameBoardCanvas").hide();
+		$("#grid").hide();
 		$("#startMsg").hide();
 
 	    //get the picture taken
@@ -43,25 +62,42 @@ function callPython(){
             document.getElementById("maze").src = "/static/images/output.jpg?t=" + new Date().getTime();
             $("#load").hide();
             $("#maze").show();
+            document.getElementById("convert").disabled = false;
         })
 
 	}
 
 	if (this.id == "convert"){
-	    $("#GameBoardCanvas").hide();
+	    editmode = 0;
+	    $("#grid").hide();
         $("#maze").hide();
         $("#startMsg").hide();
         $("#load").show();
-	    getMaze()
+	    getMaze();
 	}
 
 
 	if (this.id == "start"){
-		document.getElementById("maze").src = "https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966";
+	    editmode = 0;
+
+	    if((typeof endCoordinate !== 'undefined')&& (typeof startCoordinate !== 'undefined')){
+
+        console.log("hier komt de data");
+	        console.log(board);
+
+
+	    $.post( "/sendMaze", {
+            javascript_data: JSON.stringify(board)
+            });
+
+	    document.getElementById("maze").src = "https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966";
 	    $("#maze").show();
-	    $("#GameBoardCanvas").hide();
+	    $("#grid").hide();
 	    $("#load").hide();
 	    $("#startMsg").hide();
+	    } else{
+	    alert("Select start and end point")
+	    }
 	}
 
 

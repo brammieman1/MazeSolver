@@ -24,19 +24,45 @@
 		<div id="startMsg">
 			<div class="jumbotron">
 			  <h1 class="display-3">Welcome!</h1>
-			  <p class="lead">This a maze, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			  <p class="lead">The maze solver is an application that solves a hand drawn mazes, using a Raspberry PI, DE1-SOC and a Pi camera.</p>
 			  <hr class="my-4">
-			  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-			  <p class="lead">
-				<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-			  </p>
+			  <p>It uses the processing power of the DE1 SOC to solve the maze. The Raspberry Pi is used for images processing and the user interaction.</p>
+			  <hr class="my-4">
+			  <p>Module 5 project TCS & EE, Universisty of Twente, 2017</p>
+				<ul>
+				  <li>Heleen Visserman			S1838636</li>
+				  <li>Bram Denkers				S1828053</li>
+				  <li>Jeroen Waterink			S1736167</li>
+				  <li>Anh Dang Dinh Viet Anh	S1843044</li>
+    			</ul>
+				<!--<p class="lead">-->
+				<!--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+			  <!--</p>-->
 			</div>
+		</div>
+
+		<div id="grid" class="jumbotron">
+			<canvas id="GameBoardCanvas" width="100%" ></canvas>
+
+				<div class="col-xs-6">
+				  <button type="button" class="btn btn-default" id="startp">
+				  <span class="glyphicon glyphicon-pushpin"></span> Start
+				  </button>
+				</div>
+
+				<div class="col-xs-6">
+				  <button type="button" class="btn btn-default" id="endp">
+				  End <span class="glyphicon glyphicon-pushpin"></span>
+				  </button>
+				</div>
+
+
+
 
 		</div>
 
-		<div id="load" class="loader"></div>
 
-		<canvas id="GameBoardCanvas" width="100%" ></canvas>
+		<div id="load" class="loader"></div>
 
 	  	<img class="img-responsive" id="maze" width="90%" src="/static/loadingcam.png" alt="Animation">
 
@@ -44,16 +70,7 @@
     <div class="col-sm-3">
 	<div class="jumbotron text-center" id="control-panel">
 		<div class="row">
-			<!--<div class="col-xs-12">-->
-				<!--<div class="btn-group">-->
-				  <!--<button type="button" class="btn btn-default" id="undo">-->
-				  <!--<span class="glyphicon glyphicon-triangle-left"></span> Undo-->
-				  <!--</button>-->
-				  <!--<button type="button" class="btn btn-default" id="redo">-->
-				  <!--Redo <span class="glyphicon glyphicon-triangle-right"></span>-->
-				  <!--</button>-->
-				<!--</div>-->
-			<!--</div>-->
+
 			<div class="col-xs-6">
 				<button type="button" class="btn btn-primary btn-lg" id="camera">
 				<span class="glyphicon glyphicon-facetime-video"></span>

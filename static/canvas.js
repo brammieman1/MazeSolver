@@ -3,49 +3,67 @@
 //http://jsfiddle.net/n8j1s/4y22135r/
 
 //The game board 1 = walls, 0 = free space, and -1 = the goal
+window.addEventListener('mousemove', mousePos, false);
 
 var canvas = $('#GameBoardCanvas');
+var canvasElement = document.getElementById("GameBoardCanvas");
 var data = [];
+var board = [];
+var width;
+var widthArray;
+var heightArray;
+var blockSize;
+var height;
+var clickReady;
+var xblock;
+var yblock;
+var endCoordinate;
+var startCoordinate;
 
 function getMaze(){
-     var board = [];
     //getting the data from pyhton
     console.log("The python is now asked to return the array")
     var getData = $.get('/data');
 
-    //check if python is done
+    //Check if python is done
     getData.done(function(results){
     data = results.results;
-    console.log(data);
-    var board = data;
-
-    var player = {
-        x: 0,
-        y: 0
-    };
+    board = data;
 
     //Draw the game board
-    function draw(){
+    draw();
+    canvasElement.addEventListener("click", edit);
+    });
+}
 
-    //check if board has data other wise show loading image
-         if (board.length > 0 ){
-            $("#GameBoardCanvas").show();
-            $("#load").hide();
-         } else {
-            $("#GameBoardCanvas").hide();
-            $("#load").show();
-         }
+function setupCanvas(){
+        width = ($("#grid").width()) - 90;
+        widthArray = board[0].length;
+        heightArray = board.length;
+        blockSize = width/widthArray;
+        height = blockSize * heightArray;
 
-        // set canvas properties
-        var width = (($("#canvasSize").width())/100)*90;
-        var widthArray = board[0].length;
-        var heightArray = board.length;
-        var blockSize = width/widthArray;
-        var height = blockSize * heightArray;
+        console.log(width,widthArray,heightArray,blockSize,height)
 
         document.getElementById("GameBoardCanvas").height = height;
         document.getElementById("GameBoardCanvas").width = width;
         document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
+}
+
+function draw(){
+
+      console.log("Draw");
+
+        //check if board has data other wise show loading image
+         if (board.length > 0 ){
+            $("#grid").show();
+            $("#load").hide();
+         } else {
+            $("#grid").hide();
+            $("#load").show();
+         }
+
+        setupCanvas();
 
         var ctx = canvas[0].getContext('2d');
         ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -70,34 +88,138 @@ function getMaze(){
                     ctx.lineTo((x+1)*blockSize, y*blockSize);
                     ctx.stroke();
                 }
+
+                //Start
+                else if(board[y][x] === -2){
+                    ctx.beginPath();
+                    ctx.lineWidth = 5;
+                    ctx.strokeStyle = "green";
+                    ctx.moveTo(x*blockSize, y*blockSize);
+                    ctx.lineTo((x+1)*blockSize, (y+1)*blockSize);
+                    ctx.moveTo(x*blockSize, (y+1)*blockSize);
+                    ctx.lineTo((x+1)*blockSize, y*blockSize);
+                    ctx.stroke();
+                }
+
+
+                //Draw the visited
+                else if(board[y][x] === 2){
+                    ctx.fillStyle="gray";
+                    ctx.fillRect(x*blockSize, y*blockSize, blockSize, blockSize);
+                    ctx.fillStyle="black";
+
+                }
+
+                //Draw the path
+                else if(board[y][x] === 3){
+                    ctx.fillStyle="blue";
+                    ctx.fillRect(x*blockSize, y*blockSize, blockSize, blockSize);
+                    ctx.fillStyle="black";
+                }
+
             }
         }
-        //Draw the player
-        ctx.beginPath();
-        var half = blockSize/2;
-        ctx.fillStyle = "green";
-        ctx.arc(player.x*blockSize+half, player.y*blockSize+half, half, 0, 2*Math.PI);
-        ctx.fill();
     }
 
-    //Check to see if the new space is inside the board and not a wall
-    function canMove(x, y){
-        return (y>=0) && (y<board.length) && (x >= 0) && (x < board[y].length) && (board[y][x] != 1);
-    }
+function mousePos(e) {
+          var pos = getCoordinates(canvasElement, e);
+        }
 
-    $(document).keyup(function(e){
-        if((e.which == 38) && canMove(player.x, player.y-1))//Up arrow
-            player.y--;
-        else if((e.which == 40) && canMove(player.x, player.y+1)) // down arrow
-            player.y++;
-        else if((e.which == 37) && canMove(player.x-1, player.y))
-            player.x--;
-        else if((e.which == 39) && canMove(player.x+1, player.y))
-            player.x++;
-        draw();
-        e.preventDefault();
-    });
-    draw();
-    });
+function getCoordinates(canvasElement, evt) {
+
+          var rect = canvasElement.getBoundingClientRect(), // abs. size of element
+          scaleX = canvasElement.width / rect.width, // relationship bitmap vs. element for X
+          scaleY = canvasElement.height / rect.height; // relationship bitmap vs. element for Y
+
+            var mx = (evt.clientX - rect.left) * scaleX; // scale mouse coordinates after they have
+            var my = (evt.clientY - rect.top) * scaleY; // been adjusted to be relative to element
+
+
+           //check if mouse poss is in canvas
+          if (mx >= 0 && mx <= canvasElement.width && my >= 0 && my <= canvasElement.height){
+            var widthArr = board[0].length;
+            var heightArr = board.length;
+
+            var mappingx = (canvasElement.width / widthArr)* scaleX;
+            var mappingy = (canvasElement.height / heightArr)* scaleY;
+
+
+            xblock = Math.floor(mx/mappingx);
+            yblock = Math.floor(my/mappingy);
+
+//            console.log("x block: "+xblock);
+//            console.log("y block: "+yblock);
+
+            clickReady =true;
+            } else {
+            clickReady =false;
+            }
+        }
+
+function edit(){
+    console.log("er is geklikt");
+    //First check if edit mode is set
+    console.log("editmode: "+editMode);
+
+    if (!editMode == 0){
+        if (clickReady){
+            if (editMode == 1){
+                var currentVal = board[yblock-1][xblock-1]
+                if(currentVal >= 1){
+                board[yblock-1][xblock-1]=0;
+                }
+                if(currentVal < 1){
+                board[yblock-1][xblock-1]=1;
+                }
+                draw();
+            }
+            if (editMode == -1){
+                var currentVal = board[yblock-1][xblock-1]
+
+                if (currentVal == 0){
+                    if (typeof endCoordinate !== 'undefined'){
+                    board[endCoordinate["y"]][endCoordinate["x"]]= 0;
+                    }
+
+                    endCoordinate = {y:yblock-1, x:xblock-1};
+                    board[yblock-1][xblock-1]=-1;
+                    draw();
+                }
+            }
+            if (editMode == -2){
+                var currentVal = board[yblock-1][xblock-1]
+
+                if (currentVal == 0){
+                    if (typeof startCoordinate !== 'undefined'){
+                    board[startCoordinate["y"]][startCoordinate["x"]]= 0;
+                    }
+
+                    startCoordinate = {y:yblock-1, x:xblock-1};
+                    board[yblock-1][xblock-1]=-2;
+                    draw();
+                }
+            }
+        }
+    }
 }
+
+
+
+
+// canvasElement.addEventListener("click",function(){
+//            console.log("clicked");
+//            board[yblock][xblock]=-2;
+//            draw();
+//            });
+
+
+
+
+
+
+
+
+
+
+
 

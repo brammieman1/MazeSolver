@@ -1,7 +1,7 @@
 import gen as gen
-from flask import Flask, render_template, Response, jsonify
-import functions as pfun
-from camera_pi import Camera
+from flask import Flask, render_template, Response, jsonify,json,request
+# import functions as pfun
+# from camera_pi import Camera
 # hoi
 app = Flask(__name__)
 
@@ -25,6 +25,20 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+@app.route('/sendMaze', methods = ['POST'])
+def get_post_javascript_data():
+    jsdata = request.form['javascript_data']
+    print("i am alive")
+    print(jsdata)
+
+
+
+    # return json.loads(jsdata)[0]
+    return'Hello, World!'
+
+
+
+
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(Camera()),
@@ -42,22 +56,22 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    mazeArray = pfun.convert().tolist()
-    print(mazeArray)
-    return jsonify({'results': mazeArray})
+    # mazeArray = pfun.convert().tolist()
+    # print(mazeArray)
+    # return jsonify({'results': mazeArray})
 
-    # return jsonify({'results': [
-    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    #  [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    # [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-    # [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    # [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
-    # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    # [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
-    # ]})
+    return jsonify({'results': [
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    [ 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    ]})
 
 
 @app.route('/<cmd>')
