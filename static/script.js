@@ -87,7 +87,9 @@ function callPython(){
 
 
 	    $.post( "/sendMaze", {
-            javascript_data: JSON.stringify(board)
+            maze: JSON.stringify(board),
+            start: JSON.stringify(startCoordinate),
+            end: JSON.stringify(endCoordinate),
             });
 
 	    document.getElementById("maze").src = "https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966";

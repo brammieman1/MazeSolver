@@ -1,5 +1,5 @@
 import gen as gen
-from flask import Flask, render_template, Response, jsonify
+from flask import Flask, render_template, Response, jsonify, request
 import functions as pfun
 from camera_pi import Camera
 # hoi
@@ -27,9 +27,13 @@ def gen(camera):
 
 @app.route('/sendMaze', methods = ['POST'])
 def get_post_javascript_data():
-    jsdata = request.form['javascript_data']
+    maze = request.form['maze']
+    start = request.form['start']
+    end = request.form['end']
     print("i am alive")
-    print(jsdata)
+    print(maze)
+    print(start)
+    print(end)
 
 
 
@@ -69,7 +73,7 @@ def data():
     # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
     # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
     # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    # [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    # [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
     # ]})
 
 
