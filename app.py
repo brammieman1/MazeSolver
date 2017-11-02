@@ -1,7 +1,7 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify, request
-# import functions as pfun
-# from camera_pi import Camera
+import functions as pfun
+from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 # hoi
@@ -68,22 +68,22 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    # mazeArray = pfun.convert().tolist()
-    # return jsonify({'results': mazeArray})
+    mazeArray = pfun.convert().tolist()
+    return jsonify({'results': mazeArray})
 
-    return jsonify({'results': [
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
-    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
-    ]})
+    # return jsonify({'results': [
+    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    # [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    # [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    # [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    # [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    # [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    # ]})
 
 
 @app.route('/<cmd>')

@@ -7,8 +7,8 @@ document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
 document.getElementById("startp").onclick = callPython;
 document.getElementById("endp").onclick = callPython;
-//document.getElementById("convert").disabled = true;
-document.getElementById("convert").disabled = false;
+document.getElementById("convert").disabled = true;
+//document.getElementById("convert").disabled = false;
 
 $("#startMsg").show();
 $("#maze").hide();
