@@ -1,7 +1,7 @@
 import gen as gen
 from flask import Flask, render_template, Response, jsonify, request
-import functions as pfun
-from camera_pi import Camera
+# import functions as pfun
+# from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 # hoi
@@ -37,10 +37,10 @@ def get_post_javascript_data():
     print("i am alive")
     start = (startx,starty)
     end = (endx,endy)
-    path = bfs.BFS(start, end, maze)
-    bfs.drawpath(path)
+    print(maze)
+    resultaat = bfs.BFS(start, end, bfs.arrayCoverting(maze))
     print("de vogel is gevolgen")
-
+    print(resultaat)
     # return json.loads(jsdata)[0]
     return'Hello, World!'
 
@@ -68,9 +68,10 @@ def data():
     # return jsonify({'results': mazeArray})
 
     return jsonify({'results': [
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
     [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-     [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
     [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
     [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
     [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],

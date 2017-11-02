@@ -37,7 +37,7 @@ function getMaze(){
 }
 
 function setupCanvas(){
-        width = ($("#grid").width()) - 90;
+        width = ($("#grid").width());
         widthArray = board[0].length;
         heightArray = board.length;
         blockSize = width/widthArray;
@@ -47,7 +47,7 @@ function setupCanvas(){
 
         document.getElementById("GameBoardCanvas").height = height;
         document.getElementById("GameBoardCanvas").width = width;
-        document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
+//        document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
 }
 
 function draw(){
@@ -147,6 +147,9 @@ function getCoordinates(canvasElement, evt) {
             xblock = Math.floor(mx/mappingx);
             yblock = Math.floor(my/mappingy);
 
+            console.log("x: "+xblock);
+            console.log("y: "+yblock);
+
 //            console.log("x block: "+xblock);
 //            console.log("y block: "+yblock);
 
@@ -164,38 +167,38 @@ function edit(){
     if (!editMode == 0){
         if (clickReady){
             if (editMode == 1){
-                var currentVal = board[yblock-1][xblock-1]
+                var currentVal = board[yblock][xblock]
                 if(currentVal >= 1){
-                board[yblock-1][xblock-1]=0;
+                board[yblock][xblock]=0;
                 }
                 if(currentVal < 1){
-                board[yblock-1][xblock-1]=1;
+                board[yblock][xblock]=1;
                 }
                 draw();
             }
             if (editMode == -1){
-                var currentVal = board[yblock-1][xblock-1]
+                var currentVal = board[yblock][xblock]
 
                 if (currentVal == 0){
                     if (typeof endCoordinate !== 'undefined'){
                     board[endCoordinate["y"]][endCoordinate["x"]]= 0;
                     }
 
-                    endCoordinate = {y:yblock-1, x:xblock-1};
-                    board[yblock-1][xblock-1]=-1;
+                    endCoordinate = {y:yblock, x:xblock};
+                    board[yblock][xblock]=-1;
                     draw();
                 }
             }
             if (editMode == -2){
-                var currentVal = board[yblock-1][xblock-1]
+                var currentVal = board[yblock][xblock]
 
                 if (currentVal == 0){
                     if (typeof startCoordinate !== 'undefined'){
                     board[startCoordinate["y"]][startCoordinate["x"]]= 0;
                     }
 
-                    startCoordinate = {y:yblock-1, x:xblock-1};
-                    board[yblock-1][xblock-1]=-2;
+                    startCoordinate = {y:yblock, x:xblock};
+                    board[yblock][xblock]=-2;
                     draw();
                 }
             }
