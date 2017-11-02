@@ -23,6 +23,10 @@ def BFS(start,end, maze):
         current = path[-1]
 
         if current == end:
+            for position in path:
+                print(position)
+                x, y = position
+                maze[x][y] = 3
             return path
 
         for adjacent in getadjacent(current):
@@ -34,6 +38,9 @@ def BFS(start,end, maze):
                 queue.put(new_path)
 
     print("Queue is full! no answer")
+
+
+
 
 def drawpath(path): #first you need to call the BFS function before drawpath()
     for position in path:
