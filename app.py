@@ -28,12 +28,16 @@ def gen(camera):
 @app.route('/sendMaze', methods = ['POST'])
 def get_post_javascript_data():
     maze = request.form['maze']
-    start = request.form['start']
-    end = request.form['end']
+    startx = request.form['startx']
+    starty = request.form['starty']
+    endx = request.form['endx']
+    endy = request.form['endy']
     print("i am alive")
     print(maze)
-    print(start)
-    print(end)
+    print(startx)
+    print(starty)
+    print(endx)
+    print(endy)
 
 
 
