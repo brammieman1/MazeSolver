@@ -4,6 +4,9 @@ import sqlite3
 import numpy as np
 import io
 
+
+
+
 def adapt_array(array):
     out = io.BytesIO()
     np.save(out, array)

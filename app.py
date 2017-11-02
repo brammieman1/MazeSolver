@@ -2,6 +2,7 @@ import gen as gen
 from flask import Flask, render_template, Response, jsonify, request
 import functions as pfun
 from camera_pi import Camera
+import BFS as bfs
 # hoi
 app = Flask(__name__)
 
@@ -33,13 +34,13 @@ def get_post_javascript_data():
     endx = request.form['endx']
     endy = request.form['endy']
     print("i am alive")
+    start = (startx,starty)
+    end = (endx,endy)
+    maze[startx][starty] = 0
+    maze[endx][endy] = 0
+    path = bfs.BFS(start, end, maze)
+    bfs.drawpath(path)
     print(maze)
-    print(startx)
-    print(starty)
-    print(endx)
-    print(endy)
-
-
 
     # return json.loads(jsdata)[0]
     return'Hello, World!'

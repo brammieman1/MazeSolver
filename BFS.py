@@ -3,8 +3,8 @@ from queue import Queue
 import numpy as np
 import BlackWhite2 as bw
 
-start = (170,170)
-end = (175,175)
+start = (1,1)
+end = (3,3)
 
 def isZero(value):
     if value == 0:
@@ -45,8 +45,9 @@ def drawpath(path): #first you need to call the BFS function before drawpath()
 if __name__ == "__main__":
     anothermaze = bw.binarize_image('test.jpg',150)
     #print(anothermaze)
-    numpymaze = np.array([(1, 1, 1, 1, 1), (1, 0, 0, 0, 1), (1, 1, 0, 1, 1), (1, 0, 0, 0, 1), (1, 1, 1, 1, 1)])
-    path = BFS(start,end,anothermaze)
+    numpymaze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
+    path = BFS(start,end,numpymaze)
     drawpath(path);
-    print(anothermaze.tolist())
+    print(numpymaze)
+    print(numpymaze.tolist())
     print("queued")
