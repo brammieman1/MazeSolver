@@ -35,6 +35,25 @@
     float: right;
 }
 
+
+#endpXL{
+    margin-top: 20px;
+    float: left;
+}
+
+#startpXL{
+    margin-top: 20px;
+    float: right;
+}
+
+#editXL{
+    margin:0 50%;
+    margin-top: 20px;
+    width:100px;
+    position:relative;
+    left:-50px
+}
+
 #zoom{
     margin-top: 20px;
     float: center;

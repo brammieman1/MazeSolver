@@ -8,11 +8,16 @@ document.getElementById("start").onclick = callPython;
 document.getElementById("startp").onclick = callPython;
 document.getElementById("endp").onclick = callPython;
 document.getElementById("zoom").onclick = callPython;
+document.getElementById("startpXL").onclick = callPython;
+document.getElementById("endpXL").onclick = callPython;
+document.getElementById("editXL").onclick = callPython;
+
+
 //document.getElementById("convert").disabled = true;
 document.getElementById("convert").disabled = false;
 
 $('#myModal').on('hidden.bs.modal', function(e) {
-console.log("jana");
+editMode = 0;
 getMazeSM();
 });
 
@@ -40,15 +45,15 @@ function callPython(){
 	}
 
 
-	if (this.id == "edit"){
+	if (this.id == "edit" ||this.id == "editXL"){
 	    editMode = 1;
 	}
 
-	if (this.id == "startp"){
+	if (this.id == "startp" || this.id == "startpXL"){
 	    editMode = -2;
 	}
 
-	if (this.id == "endp"){
+	if (this.id == "endp" || this.id == "endpXL"){
 	    editMode = -1;
 	}
 
