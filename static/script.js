@@ -13,8 +13,8 @@ document.getElementById("endpXL").onclick = callPython;
 document.getElementById("editXL").onclick = callPython;
 
 
-//document.getElementById("convert").disabled = true;
-document.getElementById("convert").disabled = false;
+document.getElementById("convert").disabled = true;
+//document.getElementById("convert").disabled = false;
 
 $('#myModal').on('hidden.bs.modal', function(e) {
 editMode = 0;
