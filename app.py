@@ -18,7 +18,7 @@ AVAILABLE_COMMANDS = {
     'Rest': RESET
 }
 
-output = './MazeSolver/static/images/output.jpg'
+output = './static/images/output.jpg'
 
 @app.route('/')
 def execute():
@@ -50,9 +50,9 @@ def get_post_javascript_data():
 def insertImage(name):
     timestamp = str(time.time())
     puzzlename = name
-    newoutput = './MazeSolver/static/images' + timestamp + '.jpg'
+    newoutput = './static/images' + timestamp + '.jpg'
     shutil.copyfile(output, newoutput)
-    conn = sqlite3.connect('./MazeSolver/maze.db')
+    conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
     #c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
     c.execute("INSERT INTO puzzle(name,path) VALUES(?,?)",(puzzlename,newoutput))
