@@ -3,6 +3,13 @@
 	padding-left: 35px;
 }
 
+#grid{
+	padding-right: 35px;
+	padding-left: 35px;
+	padding-bottom: 80px;
+	padding-top: 35px;
+}
+
 .btn-primary{
 	margin-left: 0;
 	margin-right: 0;
@@ -18,7 +25,39 @@
 	margin-bottom: 30px;
 }
 
+#endp{
+    margin-top: 20px;
+    float: left;
+}
+
+#startp{
+    margin-top: 20px;
+    float: right;
+}
+
+#zoom{
+    margin-top: 20px;
+    float: center;
+}
+
+#cbut{
+    padding-left:10px;
+}
+
+.modal-lg {
+    width: 90%;
+}
+
+
 .btn-info {
+	padding: 10px;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.btn-warning {
 	padding: 10px;
 	font-size: 20px;
 	margin-top: 10px;
@@ -43,7 +82,7 @@
 
 #GameBoardCanvas {
 
-    border: solid black;
+   // border: solid black;
     padding: 0px;
     margin-left: auto;
     margin-right: auto;
@@ -51,6 +90,29 @@
 
 }
 
-body {
+#GameBoardCanvasXL {
 
+   // border: solid black;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+  //  background: black;
+
+}
+
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    margin-top: 30%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

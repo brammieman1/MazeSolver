@@ -1,39 +1,126 @@
 document.getElementById("camera").onclick = callPython;
-document.getElementById("trash").onclick = callPython;
+document.getElementById("picture").onclick = callPython;
+document.getElementById("convert").onclick = callPython;
 document.getElementById("edit").onclick = callPython;
-document.getElementById("erase").onclick = callPython;
-document.getElementById("undo").onclick = callPython;
-document.getElementById("redo").onclick = callPython;
+document.getElementById("save").onclick = callPython;
+document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
+document.getElementById("startp").onclick = callPython;
+document.getElementById("endp").onclick = callPython;
+document.getElementById("zoom").onclick = callPython;
+//document.getElementById("convert").disabled = true;
+document.getElementById("convert").disabled = false;
 
-$("#maze").show();
-$("#GameBoardCanvas").hide();
+$('#myModal').on('hidden.bs.modal', function(e) {
+console.log("jana");
+getMazeSM();
+});
 
+$("#startMsg").show();
+$("#maze").hide();
+$("#grid").hide();
+$("#load").hide();
 
+var editMode = 0;
+var solutionBlock = false;
+var XL = false;
 
 function callPython(){
 	console.log(this.id);
 
-
 	if (this.id == "camera"){
+	    document.getElementById("convert").disabled = true;
+	    editMode = 0;
+	    document.getElementById("maze").src = "/static/loadingcam.png";
 		document.getElementById("maze").src = "/video_feed";
 		$("#maze").show();
-		$("#GameBoardCanvas").hide();
+		$("#grid").hide();
+		$("#load").hide();
+		$("#startMsg").hide();
 	}
 
-	if (this.id == "start"){
-		document.getElementById("maze").src = "https://camo.githubusercontent.com/fe94d9aba32c8683e6f5acfeddcf153577fd8051/687474703a2f2f6e756c6c70726f6772616d2e636f6d2f696d672f706174682f6d617a652e676966";
-	    $("#maze").show();
-	    $("#GameBoardCanvas").hide();
-	}
 
 	if (this.id == "edit"){
+	    editMode = 1;
+	}
 
-		//document.getElementById("maze").src = "/static/jeroen-vector.png";
-        $("#GameBoardCanvas").show();
+	if (this.id == "startp"){
+	    editMode = -2;
+	}
+
+	if (this.id == "endp"){
+	    editMode = -1;
+	}
+
+	if (this.id == "zoom"){
+	    editMode = 1;
+	    getMazeXL();
+	}
+
+	if (this.id == "picture"){
+	    editMode = 0;
+        document.getElementById("maze").src = "/";
+        //show loading
+        $("#load").show();
+
+       //hide all
         $("#maze").hide();
+		$("#grid").hide();
+		$("#startMsg").hide();
+
+	    //get the picture taken
+	    var getSnap = $.get('/snapshot');
+	    getSnap.done(function(snapshot){
+            data = snapshot.snapshot;
+            console.log(data);
+            document.getElementById("maze").src = "/static/images/output.jpg?t=" + new Date().getTime();
+            $("#load").hide();
+            $("#maze").show();
+            document.getElementById("convert").disabled = false;
+        })
 
 	}
+
+	if (this.id == "convert"){
+	    editmode = 0;
+	    $("#grid").hide();
+        $("#maze").hide();
+        $("#startMsg").hide();
+        $("#load").show();
+	    getMaze();
+
+	    document.getElementById("edit").disabled = false;
+        document.getElementById("startp").disabled = false;
+        document.getElementById("endp").disabled = false;
+        document.getElementById("start").disabled = false;
+        solutionBlock = false;
+	}
+
+
+	if (this.id == "start"){
+	    editmode = 0;
+
+
+	    if((typeof endCoordinate !== 'undefined')&& (typeof startCoordinate !== 'undefined')){
+        $("#grid").hide();
+        $("#maze").hide();
+        $("#startMsg").hide();
+        $("#load").show();
+        getSolution();
+
+        solutionBlock = true;
+        document.getElementById("edit").disabled = true;
+        document.getElementById("startp").disabled = true;
+        document.getElementById("endp").disabled = true;
+        document.getElementById("start").disabled = true;
+
+
+	    } else{
+	    alert("Select start and end point")
+	    }
+	}
+
+
 
 	var dest = '/';
 	dest += this.id;

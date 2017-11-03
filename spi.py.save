@@ -1,13 +1,1 @@
-import time
-import wiringpi
-
-SPIchannel = 0  # SPI Channel (CE0)
-SPIspeed = 1  # Clock Speed in Hz
-wiringpi.wiringPiSetupGpio()
-wiringpi.wiringPiSPISetup(SPIchannel, SPIspeed)
-
-#   prefix = str(0)   # 63 is send something back. 85 is only send.
-sendData = 0B10101010  # will send ONE bytes, a byte 1
-recvData = wiringpi.wiringPiSPIDataRW(SPIchannel, sendData) # prefix +
-print(recvData[1])
 
