@@ -1,9 +1,12 @@
 import gen as gen
+import shutil
 from flask import Flask, render_template, Response, jsonify, request
-import functions as pfun
-from camera_pi import Camera
+#import functions as pfun
+#from camera_pi import Camera
 import BFS as bfs
 import numpy as np
+import sqlite3
+import time
 # hoi
 app = Flask(__name__)
 
@@ -14,6 +17,8 @@ AVAILABLE_COMMANDS = {
     'Start': START,
     'Rest': RESET
 }
+
+output = './MazeSolver/static/images/output.jpg'
 
 @app.route('/')
 def execute():
@@ -44,8 +49,28 @@ def get_post_javascript_data():
     # return json.loads(jsdata)[0]
     return'Hello, World!'
 
+def insertImage(name):
+    timestamp = str(time.time())
+    puzzlename = name
+    newoutput = './MazeSolver/static/images' + timestamp + '.jpg'
+    shutil.copyfile(output, newoutput)
+    conn = sqlite3.connect('./MazeSolver/maze.db')
+    c = conn.cursor()
+    #c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
+    c.execute("INSERT INTO puzzle(name,path) VALUES(?,?)",(puzzlename,newoutput))
+    conn.commit()
+    print("werkt het?")
+    conn.close()
+
+def getPuzzles():
+    conn = sqlite3.connect('./MazeSolver/maze.db')
+    c = conn.cursor()
+    c.execute("SELECT name, path FROM puzzle ORDER BY id DESC")
+    print(c.fetchall())
+    #print(y,z)
 
 
+    return None
 
 @app.route('/video_feed')
 def video_feed():
@@ -96,7 +121,9 @@ def command(cmd=None):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    insertImage("Baap")
+    getPuzzles()
+    #app.run(debug=True, host='0.0.0.0')
 
 
 
