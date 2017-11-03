@@ -39,15 +39,9 @@ def get_post_javascript_data():
     starty = int(request.form['starty'])
     endx = int(request.form['endx'])
     endy = int(request.form['endy'])
-    print("i am alive")
     start = (starty,startx)
     end = (endy,endx)
-    print(maze)
-    print(start,end)
     resultaat = bfs.BFS(start, end, bfs.arrayCoverting(maze))
-    print("de vogel is gevolgen")
-    print(resultaat)
-
     solvedArray = resultaat.tolist()
     return jsonify({'solutions': solvedArray})
 
@@ -63,7 +57,6 @@ def insertImage(name):
     #c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
     c.execute("INSERT INTO puzzle(name,path) VALUES(?,?)",(puzzlename,newoutput))
     conn.commit()
-    print("werkt het?")
     conn.close()
 
 def getPuzzles():
@@ -71,7 +64,6 @@ def getPuzzles():
     c = conn.cursor()
     c.execute("SELECT name, path FROM puzzle ORDER BY id DESC")
     print(c.fetchall())
-    #print(y,z)
 
 
     return None
