@@ -18,11 +18,11 @@ writePins = [gpio0, gpio1, gpio2]
 readPins = [gpio3, gpio4, gpio5, gpio6]
 
 #Test data
-data = [1,0,1,0,1,1]
 dataArray = [[1,0,1,0,1,1,0,1,1,1,0],[1,0,1,0,1,1,1,0],[1,0,1,0,1,1]]
 
 #Constants
 byteSize = 8  #size of the dataparts to be send
+stuffing = 1
 
 #sending scheme
 #2 1 0 | miso
@@ -44,6 +44,34 @@ def sendYSize(ySize): #ySize should be an integer
    ySize8 = ySize + (byteSize - ySize%byteSize) #increase ySize to be the closest multiple of byteSize
    data = [ySize8]
    sendData(data, pins)
+
+def sendMaze(mazeArray): #mazeArray should be an a 2 dimensional array
+   """this funchtion will call convert on the array and then send the bytes
+     of the array with sendData()"""
+   pins = [gpio0, gpio1]
+   sendArray = convert(mazeArray)
+   sendData(sendArray, pins)
+
+def convert(bitArray): #Array is an array with data from the maze
+   out = 0
+   binArray = []
+   i = 0
+   for array in bitArray:
+     for bit in array:
+       out = (out << 1) | bit
+       #if i == 7 has to be before i == len(x) as the size could be equal to 8.
+       if i == (byteSize - 1):
+         binArray.append(bin(out))
+         out = 0
+       elif i == (len(array)-1):
+         for bitX in range(byteSize-((i+1)%byteSize)):
+           out = (out << 1) | stuffing
+         binArray.append(bin(out))
+         out = 0
+       i += 1
+     i = 0
+     print( "This was array:", array)
+   return(binArray)
 
 #def sendMaze(maze): #maze should be a 2 dimensional array
    #do nothing
