@@ -38,6 +38,7 @@ def BFS(start,end, maze):
                 queue.put(new_path)
 
     print("Queue is full! no answer")
+    return maze
 
 
 
