@@ -40,14 +40,18 @@ def get_post_javascript_data():
     endx = int(request.form['endx'])
     endy = int(request.form['endy'])
     print("i am alive")
-    start = (startx,starty)
-    end = (endx,endy)
-    path = bfs.BFS(start, end, maze)
-    bfs.drawpath(path)
+    start = (starty,startx)
+    end = (endy,endx)
+    print(maze)
+    print(start,end)
+    resultaat = bfs.BFS(start, end, bfs.arrayCoverting(maze))
     print("de vogel is gevolgen")
+    print(resultaat)
 
-    # return json.loads(jsdata)[0]
-    return'Hello, World!'
+    solvedArray = resultaat.tolist()
+    return jsonify({'solutions': solvedArray})
+
+
 
 def insertImage(name):
     timestamp = str(time.time())
@@ -89,21 +93,22 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    # mazeArray = pfun.convert().tolist()
-    # return jsonify({'results': mazeArray})
+    mazeArray = pfun.convert().tolist()
+    return jsonify({'results': mazeArray})
 
-    return jsonify({'results': [
-    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-     [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
-    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
-    ]})
+    # return jsonify({'results': [
+    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    # [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    # [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    # [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    # [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    # [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    # ]})
 
 
 @app.route('/<cmd>')

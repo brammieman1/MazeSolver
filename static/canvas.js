@@ -7,6 +7,16 @@ window.addEventListener('mousemove', mousePos, false);
 
 var canvas = $('#GameBoardCanvas');
 var canvasElement = document.getElementById("GameBoardCanvas");
+var space = $("#grid");
+
+
+//
+//function setXL(){
+//var canvas = $('#GameBoardCanvasXL');
+//var canvasElement = document.getElementById("GameBoardCanvasXL");
+//console.log("Opening xl view");
+//}
+
 var data = [];
 var board = [];
 var width;
@@ -21,6 +31,7 @@ var endCoordinate;
 var startCoordinate;
 
 function getMaze(){
+    XL = false;
     //getting the data from pyhton
     console.log("The python is now asked to return the array")
     var getData = $.get('/data');
@@ -36,18 +47,72 @@ function getMaze(){
     });
 }
 
+function getMazeSM(){
+    XL = false;
+    canvas = $('#GameBoardCanvas');
+    canvasElement = document.getElementById("GameBoardCanvas");
+    space = $("#grid");
+
+    //Draw the game board
+    draw();
+    canvasElement.addEventListener("click", edit);
+}
+
+function getMazeXL(){
+    XL = true;
+    canvas = $('#GameBoardCanvasXL');
+    canvasElement = document.getElementById("GameBoardCanvasXL");
+    space = $("body");
+
+    console.log(space.width());
+    //Draw the game board
+    draw();
+    canvasElement.addEventListener("click", edit);
+}
+
+
+function getSolution(){
+    XL = false;
+    var sendmaze = board;
+    sendmaze[startCoordinate["y"]][startCoordinate["x"]]= 0;
+    sendmaze[endCoordinate["y"]][endCoordinate["x"]]= 0;
+
+    var getSolution = $.post( "/sendMaze", {
+        maze: JSON.stringify(sendmaze),
+        startx: startCoordinate["x"],
+        starty: startCoordinate["y"],
+        endx: endCoordinate["x"],
+        endy: endCoordinate["y"],
+    });
+
+
+    getSolution.done(function(solutions){
+        data = solutions.solutions;
+        board = data;
+        //Draw the game board
+        draw();
+        //canvasElement.addEventListener("click", edit);
+    })
+
+}
+
 function setupCanvas(){
-        width = ($("#grid").width()) - 90;
+        if(XL){
+        width = ((space.width())/100)*88;
+        console.log("bingobingo");
+        } else{
+        width = (space.width());
+        }
         widthArray = board[0].length;
         heightArray = board.length;
         blockSize = width/widthArray;
         height = blockSize * heightArray;
 
-        console.log(width,widthArray,heightArray,blockSize,height)
+        //console.log(width,widthArray,heightArray,blockSize,height)
 
-        document.getElementById("GameBoardCanvas").height = height;
-        document.getElementById("GameBoardCanvas").width = width;
-        document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
+        canvasElement.height = height;
+        canvasElement.width = width;
+//        document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
 }
 
 function draw(){
@@ -147,6 +212,9 @@ function getCoordinates(canvasElement, evt) {
             xblock = Math.floor(mx/mappingx);
             yblock = Math.floor(my/mappingy);
 
+            //console.log("x: "+xblock);
+            //console.log("y: "+yblock);
+
 //            console.log("x block: "+xblock);
 //            console.log("y block: "+yblock);
 
@@ -161,41 +229,41 @@ function edit(){
     //First check if edit mode is set
     console.log("editmode: "+editMode);
 
-    if (!editMode == 0){
+    if (!editMode == 0 && !solutionBlock){
         if (clickReady){
             if (editMode == 1){
-                var currentVal = board[yblock-1][xblock-1]
+                var currentVal = board[yblock][xblock]
                 if(currentVal >= 1){
-                board[yblock-1][xblock-1]=0;
+                board[yblock][xblock]=0;
                 }
                 if(currentVal < 1){
-                board[yblock-1][xblock-1]=1;
+                board[yblock][xblock]=1;
                 }
                 draw();
             }
             if (editMode == -1){
-                var currentVal = board[yblock-1][xblock-1]
+                var currentVal = board[yblock][xblock]
 
                 if (currentVal == 0){
                     if (typeof endCoordinate !== 'undefined'){
                     board[endCoordinate["y"]][endCoordinate["x"]]= 0;
                     }
 
-                    endCoordinate = {y:yblock-1, x:xblock-1};
-                    board[yblock-1][xblock-1]=-1;
+                    endCoordinate = {y:yblock, x:xblock};
+                    board[yblock][xblock]=-1;
                     draw();
                 }
             }
             if (editMode == -2){
-                var currentVal = board[yblock-1][xblock-1]
+                var currentVal = board[yblock][xblock]
 
                 if (currentVal == 0){
                     if (typeof startCoordinate !== 'undefined'){
                     board[startCoordinate["y"]][startCoordinate["x"]]= 0;
                     }
 
-                    startCoordinate = {y:yblock-1, x:xblock-1};
-                    board[yblock-1][xblock-1]=-2;
+                    startCoordinate = {y:yblock, x:xblock};
+                    board[yblock][xblock]=-2;
                     draw();
                 }
             }
