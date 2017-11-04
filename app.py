@@ -45,6 +45,25 @@ def get_post_javascript_data():
     solvedArray = resultaat.tolist()
     return jsonify({'solutions': solvedArray})
 
+@app.route('/saveMaze', methods = ['POST'])
+def get_post_javascript_data():
+    name = request.form['name']
+
+    return "Save completed"
+
+
+@app.route('/deleteMaze', methods=['POST'])
+def get_post_javascript_data():
+    mid = request.form['mid']
+
+    return "Delete completed"
+
+
+@app.route('/DBdata')
+def data():
+    DBresults = "TEST"
+    return jsonify({'DBresults': DBresults})
+
 
 
 def insertImage(name):
