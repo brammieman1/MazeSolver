@@ -3,8 +3,13 @@ import sys
 
 import numpy as np
 
+#maze = np.array([[]])
+
 
 def AStar(start, goal, neighbor_nodes, dist_between, heuristic_cost_estimate):
+
+
+
     def reconstruct_path(came_from, current_node):
         path = [current_node]
         while current_node in came_from:
@@ -50,7 +55,8 @@ def is_blocked(p):
         return True
 
 def von_neumann_neighbors(p):
-    x, y = p
+    x,y = p
+
     neighbors = [(x-1, y), (x, y-1), (x+1, y), (x, y+1)]
     return [p for p in neighbors if not is_blocked(p)]
 def manhattan(p1, p2):
@@ -58,25 +64,21 @@ def manhattan(p1, p2):
 def squared_euclidean(p1, p2):
     return (p1[0]-p2[0])**2 + (p1[1]-p2[1])**2
 
+def ready(puzzle, start, end):
+    start = start
+    goal = end
+    global maze
+    maze = puzzle
+    print(maze)
+    path = AStar(start,goal,von_neumann_neighbors, manhattan,manhattan)
+    for position in path:
+        x,y = position
+        maze[x,y] = 3 #red
+    print(maze)
+    return maze
 
-start = (1, 1)
-goal = (3, 3)
-
-# invoke: python mazesolver.py <mazefile> <outputfile>[.jpg|.png|etc.]
-
-maze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
-
-path = AStar(start,
-             goal,
-             von_neumann_neighbors,
-             manhattan,
-             manhattan,
-             #lambda p1,p2 : 4*manhattan(p1,p2),
-             #squared_euclidean,
-             )
-
-for position in path:
-    x,y = position
-    maze[x,y] = 3 # red
-
-print(maze)
+if __name__ == '__main__':
+    puzzle = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
+    start = (1,1)
+    goal = (3,3)
+    ready(puzzle,start, goal)

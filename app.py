@@ -7,6 +7,7 @@ import BFS as bfs
 import numpy as np
 import sqlite3
 import time
+import starSearch
 # hoi
 app = Flask(__name__)
 
@@ -19,7 +20,7 @@ AVAILABLE_COMMANDS = {
     'History': HISTORY
 }
 
-output = './static/images/output.jpg'
+output = './MazeSolver/static/images/output.jpg'
 
 @app.route('/')
 def execute():
@@ -42,8 +43,10 @@ def get_post_javascript_data():
     endy = int(request.form['endy'])
     start = (starty,startx)
     end = (endy,endx)
-    resultaat = bfs.BFS(start, end, bfs.arrayCoverting(maze))
-    solvedArray = resultaat.tolist()
+    maze = bfs.arrayCoverting(maze)
+    print(maze)
+    solvedArray = starSearch.ready(maze,start,end)
+    solvedArray = maze.tolist()
     return jsonify({'solutions': solvedArray})
 
 @app.route('/saveMaze', methods = ['POST'])
@@ -67,7 +70,7 @@ def DBdata():
 def insertImage(name):
     timestamp = str(time.time())
     puzzlename = name
-    newoutput = './static/images' + timestamp + '.jpg'
+    newoutput = './MazeSolver/static/images' + timestamp + '.jpg'
     shutil.copyfile(output, newoutput)
     conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
