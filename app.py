@@ -1,8 +1,8 @@
 import gen as gen
 import shutil
 from flask import Flask, render_template, Response, jsonify, request
-import functions as pfun
-from camera_pi import Camera
+# import functions as pfun
+# from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 import sqlite3
@@ -10,12 +10,13 @@ import time
 # hoi
 app = Flask(__name__)
 
-CAPTURE, TRASH, START, RESET = "capture", "trash", "start", "reset"
+CAPTURE, TRASH, START, RESET, HISTORY = "capture", "trash", "start", "reset", "history"
 AVAILABLE_COMMANDS = {
     'Capture': CAPTURE,
     'Trash': TRASH,
     'Start': START,
-    'Rest': RESET
+    'Reset': RESET,
+    'History': HISTORY
 }
 
 output = './static/images/output.jpg'
@@ -46,22 +47,19 @@ def get_post_javascript_data():
     return jsonify({'solutions': solvedArray})
 
 @app.route('/saveMaze', methods = ['POST'])
-def get_post_javascript_data():
+def get_post_javascript_saveMaze():
     name = request.form['name']
-
+    insertImage(name)
     return "Save completed"
 
-
 @app.route('/deleteMaze', methods=['POST'])
-def get_post_javascript_data():
+def get_post_javascript_delete():
     mid = request.form['mid']
-
     return "Delete completed"
 
-
 @app.route('/DBdata')
-def data():
-    DBresults = "TEST"
+def DBdata():
+    DBresults = getPuzzles()
     return jsonify({'DBresults': DBresults})
 
 
@@ -73,7 +71,7 @@ def insertImage(name):
     shutil.copyfile(output, newoutput)
     conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
-    #c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
+    c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
     c.execute("INSERT INTO puzzle(name,path) VALUES(?,?)",(puzzlename,newoutput))
     conn.commit()
     conn.close()

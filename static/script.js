@@ -7,6 +7,7 @@ document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
 document.getElementById("startp").onclick = callPython;
 document.getElementById("endp").onclick = callPython;
+document.getElementById("history").onclick = callPython;
 document.getElementById("zoom").onclick = callPython;
 document.getElementById("startpXL").onclick = callPython;
 document.getElementById("endpXL").onclick = callPython;
