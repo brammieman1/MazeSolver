@@ -90,9 +90,9 @@ def DBdata():
 def puzzelPath():
     pid = request.form['pid']
     pPath = getPuzzlePath(int(pid))
-    print(pPath)
+    x,y = pPath
     oldoutput = './static/images/output.jpg'
-    newpath = pPath
+    newpath = x
     shutil.copyfile(newpath, oldoutput)
     return jsonify({'pPath': pPath})
 
