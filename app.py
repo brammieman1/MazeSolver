@@ -8,6 +8,7 @@ import numpy as np
 import sqlite3
 import time
 import starSearch
+
 # hoi
 app = Flask(__name__)
 
@@ -36,6 +37,8 @@ def gen(camera):
 
 @app.route('/sendMaze', methods = ['POST'])
 def get_post_javascript_data():
+    method = 1;
+    method = request.form['algorithm']
     maze = request.form['maze']
     startx = int(request.form['startx'])
     starty = int(request.form['starty'])
@@ -43,11 +46,24 @@ def get_post_javascript_data():
     endy = int(request.form['endy'])
     start = (starty,startx)
     end = (endy,endx)
-    maze = bfs.arrayCoverting(maze)
+    #maze = bfs.arrayCoverting(maze)
     print(maze)
-    solvedArray = starSearch.ready(maze,start,end)
-    solvedArray = maze.tolist()
-    return jsonify({'solutions': solvedArray})
+    if (method == 0): #BFS
+        maze = bfs.arrayCoverting(maze)
+        solved = bfs.bfs(maze)
+        solved = maze.tolist()
+        return jsonify({'solutions': solved})
+    if (method == 1): #a-starSearch
+        maze = bfs.arrayCoverting(maze)
+        solved = starSearch.ready(maze, start, end)
+        solved = maze.tolist()
+        return jsonify({'solutions': solved})
+    if (method == 3): #anh deel
+        #communicatie aanroepen!
+        return "not yet implemented"
+    else:
+        return None
+
 
 @app.route('/saveMaze', methods = ['POST'])
 def get_post_javascript_saveMaze():
@@ -84,9 +100,17 @@ def getPuzzles():
     c = conn.cursor()
     c.execute("SELECT name, path FROM puzzle ORDER BY id DESC")
     print(c.fetchall())
-
-
+    conn.commit()
+    conn.close()
     return None
+
+def removePuzzle(id):
+    conn = sqlite3.connect('./MazeSolver/maze.db')
+    c = conn.cursor()
+    c.execute("DELETE FROM puzzle WHERE id = (?)",(id))
+    conn.commit()
+    conn.close()
+
 
 @app.route('/video_feed')
 def video_feed():
