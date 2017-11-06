@@ -86,7 +86,11 @@ def DBdata():
     DBresults = getPuzzles()
     return jsonify({'DBresults': DBresults})
 
-
+@app.route('/puzzelPath',methods=['POST'])
+def puzzelPath():
+    pid = request.form['pid']
+    pPath = getPuzzlePath(int(pid))
+    return jsonify({'pPath': pPath})
 
 def insertImage(name):
     timestamp = str(time.time())

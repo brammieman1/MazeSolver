@@ -101,11 +101,11 @@ function callPython(){
 
 	if (this.id == "delete"){
 
-	    var mid= 20;
-
+	    if (pid != 0){
 	    var postDelete = $.post( "/deleteMaze", {
-        mid: mid
+        mid: picId
         });
+	    }
 
 	}
 
@@ -126,15 +126,22 @@ function callPython(){
             $('.dropdown-db li > a').click(function(e){
                 picId = this.id;
 
-                File = "output.jpg"
+                //hide all on screen
+                //show loader
 
-                document.getElementById("maze").src = '/static/images/'File'?t=' + new Date().getTime();
-                $("#load").hide();
-                $("#maze").show();
-                document.getElementById("convert").disabled = false;
+                var postPid = $.post( "/puzzelPath", {
+                pid: picId
+                });
 
+                postPid.done(function(pPath){
+                console.log(pPath);
 
+                //hide loader
+                //show image
+                //enable button
 
+                console.log("Saved Image is loaded!")
+                })
 
             });
 
