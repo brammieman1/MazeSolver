@@ -32,6 +32,8 @@ $('.dropdown-inverse li > a').click(function(e){
 });
 
 
+
+
 $('#myModal').on('hidden.bs.modal', function(e) {
 editMode = 0;
 getMazeSM();
@@ -46,6 +48,8 @@ var editMode = 0;
 var solutionBlock = false;
 var XL = false;
 var selectedAlgoritm = 0;
+var DBdata = [];
+var picId= 0;
 
 function callPython(){
 	console.log(this.id);
@@ -81,11 +85,17 @@ function callPython(){
 
     if (this.id == "save"){
 
-	   var name = "TestMazeX"
-        filename = "test123"
-	   var postName = $.post( "/saveMaze", {
-        name: JSON.stringify(filename)
+
+        var fname = prompt("Please enter a name:", "");
+        if (fname == null || fname == "") {
+          alert("No name given, Image NOT saved!");
+        } else {
+        console.log(fname);
+        filename = fname;
+	    var postName = $.post( "/saveMaze", {
+        name: filename
         });
+        }
 
 	}
 
@@ -99,15 +109,37 @@ function callPython(){
 
 	}
 
-
     if (this.id == "history"){
     var getData = $.get('/DBdata');
-
         //Check if python is done
         getData.done(function(DBresults){
         DBdata = DBresults.DBresults;
+        myItemList = $('#myDropdown .dropdown-menu');
+            //clear contents of dropdown
+            myItemList.html('');
+            //iterate array and create dropdown links
+            $(DBdata).each(function(index, element){
+                var item = ('<li><a href="#" id="'+element[2]+'">'+element[0]+'</a></li>');
+                myItemList.append(item);
+            });
 
-        console.log(DBdata);
+            $('.dropdown-db li > a').click(function(e){
+                picId = this.id;
+
+                File = "output.jpg"
+
+                document.getElementById("maze").src = '/static/images/'File'?t=' + new Date().getTime();
+                $("#load").hide();
+                $("#maze").show();
+                document.getElementById("convert").disabled = false;
+
+
+
+
+            });
+
+
+
         });
     }
 

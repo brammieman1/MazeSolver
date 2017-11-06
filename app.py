@@ -1,8 +1,8 @@
 import gen as gen
 import shutil
 from flask import Flask, render_template, Response, jsonify, request
-import functions as pfun
-from camera_pi import Camera
+# import functions as pfun
+# from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 import sqlite3
@@ -20,8 +20,9 @@ AVAILABLE_COMMANDS = {
     'Reset': RESET,
     'History': HISTORY
 }
-
-output = './MazeSolver/static/images/output.jpg'
+# bram
+# output = './MazeSolver/static/images/output.jpg'
+output = './static/images/output.jpg'
 
 @app.route('/')
 def execute():
@@ -68,6 +69,7 @@ def get_post_javascript_data():
 @app.route('/saveMaze', methods = ['POST'])
 def get_post_javascript_saveMaze():
     name = request.form['name']
+    print(name)
     insertImage(name)
     return "Save completed"
 
@@ -86,7 +88,8 @@ def DBdata():
 def insertImage(name):
     timestamp = str(time.time())
     puzzlename = name
-    newoutput = './MazeSolver/static/images' + timestamp + '.jpg'
+    # newoutput = './MazeSolver/static/images' + timestamp + '.jpg'
+    newoutput = './static/images/' + timestamp + '.jpg'
     shutil.copyfile(output, newoutput)
     conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
@@ -96,16 +99,19 @@ def insertImage(name):
     conn.close()
 
 def getPuzzles():
-    conn = sqlite3.connect('./MazeSolver/maze.db')
+    # conn = sqlite3.connect('./MazeSolver/maze.db')
+    conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
-    c.execute("SELECT name, path FROM puzzle ORDER BY id DESC")
-    print(c.fetchall())
+    c.execute("SELECT name, path, id FROM puzzle ORDER BY id DESC")
+    # print(c.fetchall())
+    DBinfo = c.fetchall()
     conn.commit()
     conn.close()
-    return None
+    return DBinfo
 
 def removePuzzle(id):
-    conn = sqlite3.connect('./MazeSolver/maze.db')
+    # conn = sqlite3.connect('./MazeSolver/maze.db')
+    conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
     c.execute("DELETE FROM puzzle WHERE id = (?)",(id))
     conn.commit()
