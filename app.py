@@ -1,8 +1,8 @@
 import gen as gen
 import shutil
 from flask import Flask, render_template, Response, jsonify, request
-# import functions as pfun
-# from camera_pi import Camera
+import functions as pfun
+from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 import sqlite3
@@ -44,14 +44,7 @@ def get_post_javascript_data():
     start = (starty,startx)
     end = (endy,endx)
     maze = bfs.arrayCoverting(maze)
-
-
-
-    path = starSearch.AStar(start,end,starSearch.von_neumann_neighbors(maze),starSearch.manhattan, starSearch.manhattan)
-    for position in path:
-        x, y = position
-        maze[x, y] = 3  # red
-    #resultaat = bfs.BFS(start, end, bfs.arrayCoverting(maze))
+    solvedArray = starSearch.ready(maze,start,end)
     solvedArray = maze.tolist()
     return jsonify({'solutions': solvedArray})
 

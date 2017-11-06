@@ -1,7 +1,7 @@
 
 from io import BytesIO
 import time
-#import picamera
+import picamera
 import numpy as np
 import BlackWhite2
 from PIL import Image
