@@ -7,6 +7,7 @@ document.getElementById("delete").onclick = callPython;
 document.getElementById("start").onclick = callPython;
 document.getElementById("startp").onclick = callPython;
 document.getElementById("endp").onclick = callPython;
+document.getElementById("history").onclick = callPython;
 document.getElementById("zoom").onclick = callPython;
 document.getElementById("startpXL").onclick = callPython;
 document.getElementById("endpXL").onclick = callPython;
@@ -61,6 +62,38 @@ function callPython(){
 	    editMode = 1;
 	    getMazeXL();
 	}
+
+    if (this.id == "save"){
+
+	   var name = "TestMazeX"
+
+	   var getSolution = $.post( "/saveMaze", {
+        name: JSON.stringify(name)
+        });
+
+	}
+
+	if (this.id == "delete"){
+
+	    var mid= 20;
+
+	    var getSolution = $.post( "/deleteMaze", {
+        mid: mid
+        });
+
+	}
+
+
+    if (this.id == "history"){
+    var getData = $.get('/DBdata');
+
+        //Check if python is done
+        getData.done(function(DBresults){
+        DBdata = DBresults.DBresults;
+
+        console.log(DBdata);
+        });
+    }
 
 	if (this.id == "picture"){
 	    editMode = 0;

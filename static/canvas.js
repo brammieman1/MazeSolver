@@ -4,10 +4,34 @@
 
 //The game board 1 = walls, 0 = free space, and -1 = the goal
 window.addEventListener('mousemove', mousePos, false);
+window.addEventListener('mousedown', mousePressed);
+window.addEventListener('mouseup', mouseRelease);
+
+//check if dragging mode is active
+document.body.onkeydown = function(e){
+    if(e.keyCode == 17){
+        blockMove=false;
+        console.log("Blocking off")
+        canvasElement.addEventListener("mousemove", edit);
+    }
+    }
+
+    document.body.onkeyup = function(e){
+    if(e.keyCode == 17){
+        blockMove=true;
+        canvasElement.removeEventListener("mousemove", edit);
+        console.log("Blocking on");
+    }
+    }
+
+
 
 var canvas = $('#GameBoardCanvas');
 var canvasElement = document.getElementById("GameBoardCanvas");
 var space = $("#grid");
+var OldBlockx = -1;
+var OldBlocky = -1;
+var blockMove = true;
 
 
 //
@@ -29,6 +53,8 @@ var xblock;
 var yblock;
 var endCoordinate;
 var startCoordinate;
+var editReady;
+
 
 function getMaze(){
     XL = false;
@@ -43,7 +69,7 @@ function getMaze(){
 
     //Draw the game board
     draw();
-    canvasElement.addEventListener("click", edit);
+    canvasElement.addEventListener("click", clickEdit);
     });
 }
 
@@ -55,7 +81,7 @@ function getMazeSM(){
 
     //Draw the game board
     draw();
-    canvasElement.addEventListener("click", edit);
+    canvasElement.addEventListener("click", clickEdit);
 }
 
 function getMazeXL(){
@@ -67,7 +93,7 @@ function getMazeXL(){
     console.log(space.width());
     //Draw the game board
     draw();
-    canvasElement.addEventListener("click", edit);
+    canvasElement.addEventListener("click", clickEdit);
 }
 
 
@@ -108,11 +134,9 @@ function setupCanvas(){
         blockSize = width/widthArray;
         height = blockSize * heightArray;
 
-        //console.log(width,widthArray,heightArray,blockSize,height)
-
         canvasElement.height = height;
         canvasElement.width = width;
-//        document.getElementById("GameBoardCanvas").style.borderWidth = `${blockSize}px`;
+
 }
 
 function draw(){
@@ -190,6 +214,24 @@ function mousePos(e) {
           var pos = getCoordinates(canvasElement, e);
         }
 
+function mouseRelease(){
+    editReady = false;
+    console.log("falsejaja");
+    }
+
+function mousePressed(){
+    editReady = true;
+    console.log("true");
+    }
+
+function checkIfOld(){
+if (OldBlockx == xblock && OldBlocky == yblock){
+return false;
+} else{
+return true;
+}
+}
+
 function getCoordinates(canvasElement, evt) {
 
           var rect = canvasElement.getBoundingClientRect(), // abs. size of element
@@ -199,7 +241,6 @@ function getCoordinates(canvasElement, evt) {
             var mx = (evt.clientX - rect.left) * scaleX; // scale mouse coordinates after they have
             var my = (evt.clientY - rect.top) * scaleY; // been adjusted to be relative to element
 
-
            //check if mouse poss is in canvas
           if (mx >= 0 && mx <= canvasElement.width && my >= 0 && my <= canvasElement.height){
             var widthArr = board[0].length;
@@ -208,15 +249,8 @@ function getCoordinates(canvasElement, evt) {
             var mappingx = (canvasElement.width / widthArr)* scaleX;
             var mappingy = (canvasElement.height / heightArr)* scaleY;
 
-
             xblock = Math.floor(mx/mappingx);
             yblock = Math.floor(my/mappingy);
-
-            //console.log("x: "+xblock);
-            //console.log("y: "+yblock);
-
-//            console.log("x block: "+xblock);
-//            console.log("y block: "+yblock);
 
             clickReady =true;
             } else {
@@ -224,15 +258,25 @@ function getCoordinates(canvasElement, evt) {
             }
         }
 
+
+        function clickEdit() {
+        console.log("jsjlfBOEBOE");
+        OldBlockx = -1;
+        OldBlocky = -1;
+        editReady = true;
+        edit();
+        editReady = false;
+        }
+
 function edit(){
     console.log("er is geklikt");
     //First check if edit mode is set
     console.log("editmode: "+editMode);
-
+    var currentVal = board[yblock][xblock];
     if (!editMode == 0 && !solutionBlock){
-        if (clickReady){
+        if (clickReady && editReady && checkIfOld()){
             if (editMode == 1){
-                var currentVal = board[yblock][xblock]
+
                 if(currentVal >= 1){
                 board[yblock][xblock]=0;
                 }
@@ -242,7 +286,7 @@ function edit(){
                 draw();
             }
             if (editMode == -1){
-                var currentVal = board[yblock][xblock]
+
 
                 if (currentVal == 0){
                     if (typeof endCoordinate !== 'undefined'){
@@ -255,7 +299,7 @@ function edit(){
                 }
             }
             if (editMode == -2){
-                var currentVal = board[yblock][xblock]
+
 
                 if (currentVal == 0){
                     if (typeof startCoordinate !== 'undefined'){
@@ -267,18 +311,17 @@ function edit(){
                     draw();
                 }
             }
+            OldBlockx = xblock ;
+            OldBlocky = yblock;
         }
+
+
+
     }
 }
 
 
 
-
-// canvasElement.addEventListener("click",function(){
-//            console.log("clicked");
-//            board[yblock][xblock]=-2;
-//            draw();
-//            });
 
 
 

@@ -38,6 +38,13 @@ stuffing = 1
 #-------------------------
 #1 1 0 | Soc can send
 
+def splitInt(int):
+    if (int > (2^17-1)):
+        print("Not gonna happen, integer to big")
+    firstByte = (int >> 8) & 0xff
+    lastByte = int & 0xff
+    return[firstByte, lastByte]
+
 def sendXSize(xSize): #xSize should be an integer
    pins = [gpio0]
    xSize8 = xSize + (byteSize - xSize%byteSize) #increase xSize to be the closest multiple of byteSize
@@ -57,14 +64,17 @@ def sendMaze(mazeArray): #mazeArray should be an a 2 dimensional array
    sendArray = convert(mazeArray)
    sendData(sendArray, pins)
 
-def sendStart(sPX, sPY):
+def sendStart(sP):
    """this function will send 2 values: the x and y coordinates of the startpoint of the maze"""
-   pins = [gpio2]
-   data = [sPX, sPY]
-   sendData(data, pins)
+   xpins = [gpio2]
+   sPX, sPY = sP
+   xdata = [sPX, sPY]
+   sendData(xdata, xpins)
+   ydata =
 
-def sendEnd(ePX, ePY):
+def sendEnd(eP):
    pins = [gpio2, gpio0]
+   ePX, ePY = eP
    data = [ePX, ePY]
    sendData(data, pins)
 
@@ -103,7 +113,6 @@ def sendData(dataArray, gpios): #dataArray is an array with the data to be send
      print("SEND")
      print(bytes([x]))
 
-
    #  for y in range(2):
      recvData = wiringpi.wiringPiSPIDataRW(SPIchannel, bytes([x]))
      time.sleep(8*(1/SPIspeed))
@@ -132,5 +141,15 @@ def gpioOff():
  #for gpio in readPins:
 
 
-def mazeToSoc(xSize, ySize, Maze, sP, eP):
+def mazeToSoc(xSize, ySize, maze, sP, eP):
    sendXSize(xSize)
+   sendYSize(ySize)
+   sendMaze(maze)
+   sendStart(sP)
+   sendEnd(eP)
+   while wiringpi.digitalRead(gpio3):
+     print()
+     #do nothing and wait
+
+#READ FUNCTION THAT WILL GET THE DATA FROM SOC
+
