@@ -24,7 +24,7 @@ def BFS(start,end, maze):
 
         if current == end:
             for position in path:
-                print(position)
+                #print(position)
                 x, y = position
                 maze[x][y] = 3
             return maze
