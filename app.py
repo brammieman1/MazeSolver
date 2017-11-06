@@ -49,11 +49,13 @@ def get_post_javascript_data():
     #maze = bfs.arrayCoverting(maze)
     print(maze)
     if (method == 0): #BFS
+        print("BFS")
         maze = bfs.arrayCoverting(maze)
         solved = bfs.bfs(maze)
         solved = maze.tolist()
         return jsonify({'solutions': solved})
     if (method == 1): #a-starSearch
+        print("starSearch")
         maze = bfs.arrayCoverting(maze)
         solved = starSearch.ready(maze, start, end)
         solved = maze.tolist()
