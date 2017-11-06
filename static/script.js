@@ -128,17 +128,29 @@ function callPython(){
 
                 //hide all on screen
                 //show loader
+                editMode = 0;
+                $("#load").show();
+
+               //hide all
+                $("#maze").hide();
+                $("#grid").hide();
+                $("#startMsg").hide();
+
 
                 var postPid = $.post( "/puzzelPath", {
                 pid: picId
                 });
 
                 postPid.done(function(pPath){
-                console.log(pPath);
+                console.log(pPath["pPath"][0]);
 
-                //hide loader
-                //show image
-                //enable button
+                var file = pPath["pPath"][0];
+
+
+                document.getElementById("maze").src = file+'?t=' + new Date().getTime();
+                $("#load").hide();
+                $("#maze").show();
+                document.getElementById("convert").disabled = false;
 
                 console.log("Saved Image is loaded!")
                 })
