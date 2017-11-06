@@ -37,7 +37,7 @@ def gen(camera):
 
 @app.route('/sendMaze', methods = ['POST'])
 def get_post_javascript_data():
-    method = request.form['algorithm']
+    method = int(request.form['algorithm'])
     maze = request.form['maze']
     startx = int(request.form['startx'])
     starty = int(request.form['starty'])
@@ -51,7 +51,7 @@ def get_post_javascript_data():
     if (method == 0): #BFS
         print("BFS")
         maze = bfs.arrayCoverting(maze)
-        solved = bfs.bfs(maze)
+        solved = bfs.BFS(start,end,maze)
         solved = maze.tolist()
         return jsonify({'solutions': solved})
     if (method == 1): #a-starSearch
