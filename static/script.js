@@ -66,9 +66,9 @@ function callPython(){
     if (this.id == "save"){
 
 	   var name = "TestMazeX"
-
+        filename = "test123"
 	   var postName = $.post( "/saveMaze", {
-        name: JSON.stringify(name)
+        name: JSON.stringify(filename)
         });
 
 	}
