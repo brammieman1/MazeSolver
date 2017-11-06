@@ -5,6 +5,8 @@ import numpy as np
 
 
 def AStar(start, goal, neighbor_nodes, dist_between, heuristic_cost_estimate):
+    neighbor_nodes =
+
     def reconstruct_path(came_from, current_node):
         path = [current_node]
         while current_node in came_from:
@@ -44,39 +46,39 @@ def AStar(start, goal, neighbor_nodes, dist_between, heuristic_cost_estimate):
                     openset.add(neighbor)
     print("no path found :(")
 
-def is_blocked(p):
+def is_blocked(p,maze):
     x,y = p
     if maze[x,y] == 1:
         return True
 
-def von_neumann_neighbors(p):
+def von_neumann_neighbors(p, maze):
     x, y = p
     neighbors = [(x-1, y), (x, y-1), (x+1, y), (x, y+1)]
-    return [p for p in neighbors if not is_blocked(p)]
+    return [p for p in neighbors if not is_blocked(p, maze)]
 def manhattan(p1, p2):
     return abs(p1[0]-p2[0]) + abs(p1[1]-p2[1])
 def squared_euclidean(p1, p2):
     return (p1[0]-p2[0])**2 + (p1[1]-p2[1])**2
 
-
-start = (1, 1)
-goal = (3, 3)
+if __name__ == '__main__':
+    start = (1, 1)
+    goal = (3, 3)
 
 # invoke: python mazesolver.py <mazefile> <outputfile>[.jpg|.png|etc.]
 
-maze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
+    maze = np.array([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 0, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]])
 
-path = AStar(start,
-             goal,
-             von_neumann_neighbors,
-             manhattan,
-             manhattan,
+    path = AStar(start,
+                 goal,
+                 von_neumann_neighbors,
+                 manhattan,
+                 manhattan,
              #lambda p1,p2 : 4*manhattan(p1,p2),
              #squared_euclidean,
              )
 
-for position in path:
-    x,y = position
-    maze[x,y] = 3 # red
+    for position in path:
+        x,y = position
+        maze[x,y] = 3 # red
 
-print(maze)
+        print(maze)
