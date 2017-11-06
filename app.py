@@ -44,6 +44,7 @@ def get_post_javascript_data():
     start = (starty,startx)
     end = (endy,endx)
     maze = bfs.arrayCoverting(maze)
+    print(maze)
     solvedArray = starSearch.ready(maze,start,end)
     solvedArray = maze.tolist()
     return jsonify({'solutions': solvedArray})

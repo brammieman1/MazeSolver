@@ -69,6 +69,7 @@ def ready(puzzle, start, end):
     goal = end
     global maze
     maze = puzzle
+    print(maze)
     path = AStar(start,goal,von_neumann_neighbors, manhattan,manhattan)
     for position in path:
         x,y = position
