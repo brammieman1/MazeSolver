@@ -73,30 +73,6 @@ function getMaze(){
     });
 }
 
-function getMazeSM(){
-    XL = false;
-    canvas = $('#GameBoardCanvas');
-    canvasElement = document.getElementById("GameBoardCanvas");
-    space = $("#grid");
-
-    //Draw the game board
-    draw();
-    canvasElement.addEventListener("click", clickEdit);
-}
-
-function getMazeXL(){
-    XL = true;
-    canvas = $('#GameBoardCanvasXL');
-    canvasElement = document.getElementById("GameBoardCanvasXL");
-    space = $("body");
-
-    console.log(space.width());
-    //Draw the game board
-    draw();
-    canvasElement.addEventListener("click", clickEdit);
-}
-
-
 function getSolution(){
     XL = false;
     var sendmaze = board;
@@ -121,6 +97,31 @@ function getSolution(){
     })
 
 }
+
+function getMazeSM(){
+    XL = false;
+    canvas = $('#GameBoardCanvas');
+    canvasElement = document.getElementById("GameBoardCanvas");
+    space = $("#grid");
+
+    //Draw the game board
+    draw();
+    canvasElement.addEventListener("click", clickEdit);
+}
+
+function getMazeXL(){
+    XL = true;
+    canvas = $('#GameBoardCanvasXL');
+    canvasElement = document.getElementById("GameBoardCanvasXL");
+    space = $("body");
+
+    console.log(space.width());
+    //Draw the game board
+    draw();
+    canvasElement.addEventListener("click", clickEdit);
+}
+
+
 
 function setupCanvas(){
         if(XL){

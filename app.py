@@ -1,8 +1,8 @@
 import gen as gen
 import shutil
 from flask import Flask, render_template, Response, jsonify, request
-# import functions as pfun
-# from camera_pi import Camera
+import functions as pfun
+from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 import sqlite3
@@ -71,7 +71,7 @@ def insertImage(name):
     shutil.copyfile(output, newoutput)
     conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
-    c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
+    # c.execute("CREATE TABLE puzzle (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT, path TEXT)")
     c.execute("INSERT INTO puzzle(name,path) VALUES(?,?)",(puzzlename,newoutput))
     conn.commit()
     conn.close()
@@ -102,22 +102,22 @@ def snapshot():
 
 @app.route('/data')
 def data():
-    mazeArray = pfun.convert().tolist()
-    return jsonify({'results': mazeArray})
+    # mazeArray = pfun.convert().tolist()
+    # return jsonify({'results': mazeArray})
 
-    # return jsonify({'results': [
-    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    # [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    # [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
-    # [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
-    # [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    # [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
-    # [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
-    # [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
-    # [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
-    # [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
-    # ]})
+    return jsonify({'results': [
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+    [ 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0],
+    [ 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0],
+    [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0],
+    [ 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0]
+    ]})
 
 
 @app.route('/<cmd>')

@@ -14,8 +14,8 @@ document.getElementById("endpXL").onclick = callPython;
 document.getElementById("editXL").onclick = callPython;
 
 
-document.getElementById("convert").disabled = true;
-//document.getElementById("convert").disabled = false;
+//document.getElementById("convert").disabled = true;
+document.getElementById("convert").disabled = false;
 
 $('#myModal').on('hidden.bs.modal', function(e) {
 editMode = 0;
@@ -67,7 +67,7 @@ function callPython(){
 
 	   var name = "TestMazeX"
 
-	   var getSolution = $.post( "/saveMaze", {
+	   var postName = $.post( "/saveMaze", {
         name: JSON.stringify(name)
         });
 
@@ -77,7 +77,7 @@ function callPython(){
 
 	    var mid= 20;
 
-	    var getSolution = $.post( "/deleteMaze", {
+	    var postDelete = $.post( "/deleteMaze", {
         mid: mid
         });
 
