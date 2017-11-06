@@ -85,6 +85,7 @@ function getSolution(){
         starty: startCoordinate["y"],
         endx: endCoordinate["x"],
         endy: endCoordinate["y"],
+        algorithm: selectedAlgoritm
     });
 
 

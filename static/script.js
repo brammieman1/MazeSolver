@@ -12,10 +12,25 @@ document.getElementById("zoom").onclick = callPython;
 document.getElementById("startpXL").onclick = callPython;
 document.getElementById("endpXL").onclick = callPython;
 document.getElementById("editXL").onclick = callPython;
-
-
 //document.getElementById("convert").disabled = true;
 document.getElementById("convert").disabled = false;
+
+$('.dropdown-inverse li > a').click(function(e){
+    var str = this.innerHTML;
+
+    if (str == "PI Breadth-first Search" ){
+    selectedAlgoritm = 0;
+    }
+    if (str == "PI A* Search" ){
+    selectedAlgoritm = 1;
+    }
+    if (str == "FPGA Greedy Search" ){
+    selectedAlgoritm = 2;
+    }
+
+    $('.status').text(this.innerHTML);
+});
+
 
 $('#myModal').on('hidden.bs.modal', function(e) {
 editMode = 0;
@@ -30,6 +45,7 @@ $("#load").hide();
 var editMode = 0;
 var solutionBlock = false;
 var XL = false;
+var selectedAlgoritm = 0;
 
 function callPython(){
 	console.log(this.id);
