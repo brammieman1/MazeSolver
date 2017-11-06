@@ -116,7 +116,7 @@ def getPuzzlePath(id):
     # conn = sqlite3.connect('./MazeSolver/maze.db')
     conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
-    c.execute("SELECT path FROM puzzle WHERE id = (?)",(id))
+    c.execute("SELECT path FROM puzzle WHERE id = (?)",(id,))
     # print(c.fetchall())
     DBinfo = c.fetchone()
     conn.commit()
@@ -127,7 +127,7 @@ def removePuzzle(id):
     # conn = sqlite3.connect('./MazeSolver/maze.db')
     conn = sqlite3.connect('./maze.db')
     c = conn.cursor()
-    c.execute("DELETE FROM puzzle WHERE id = (?)",(id))
+    c.execute("DELETE FROM puzzle WHERE id = (?)",(id,))
     conn.commit()
     conn.close()
 
@@ -182,6 +182,8 @@ def command(cmd=None):
 
 
 if __name__ == '__main__':
+    #getPuzzlePath(1);
+    #print(getPuzzlePath(1))
     #insertImage("Baap")
     #getPuzzles()
     app.run(debug=True, host='0.0.0.0')
