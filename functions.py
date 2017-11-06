@@ -16,7 +16,7 @@ def picture():
    time.sleep(1)
    with picamera.PiCamera() as camera:
        camera.framerate = 24
-       camera.resolution = (640, 480)
+       camera.resolution = (1280, 960)
        time.sleep(2)
        camera.capture(output)
        print('picture taken')
@@ -30,7 +30,7 @@ def copypasta(name):
 
 
 def convert():
-   return BlackWhite2.binarize_image(output, 75)
+   return BlackWhite2.binarize_image(output, 100)
 
 
 def insertImage(id,name, path):
