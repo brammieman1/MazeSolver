@@ -37,7 +37,6 @@ def gen(camera):
 
 @app.route('/sendMaze', methods = ['POST'])
 def get_post_javascript_data():
-    method = 1;
     method = request.form['algorithm']
     maze = request.form['maze']
     startx = int(request.form['startx'])
@@ -48,6 +47,7 @@ def get_post_javascript_data():
     end = (endy,endx)
     #maze = bfs.arrayCoverting(maze)
     print(maze)
+    print(method)
     if (method == 0): #BFS
         print("BFS")
         maze = bfs.arrayCoverting(maze)
@@ -63,8 +63,9 @@ def get_post_javascript_data():
     if (method == 3): #anh deel
         #communicatie aanroepen!
         return "not yet implemented"
-    else:
-        return None
+
+    return maze
+
 
 
 @app.route('/saveMaze', methods = ['POST'])
