@@ -78,7 +78,9 @@ def get_post_javascript_saveMaze():
 
 @app.route('/deleteMaze', methods=['POST'])
 def get_post_javascript_delete():
-    mid = request.form['mid']
+    mid = int(request.form['mid'])
+    print(mid)
+    removePuzzle(mid)
     return "Delete completed"
 
 @app.route('/DBdata')
