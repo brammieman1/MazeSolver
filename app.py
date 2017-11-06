@@ -112,6 +112,17 @@ def getPuzzles():
     conn.close()
     return DBinfo
 
+def getPuzzlePath(id):
+    # conn = sqlite3.connect('./MazeSolver/maze.db')
+    conn = sqlite3.connect('./maze.db')
+    c = conn.cursor()
+    c.execute("SELECT path FROM puzzle WHERE id = (?)",(id))
+    # print(c.fetchall())
+    DBinfo = c.fetchone()
+    conn.commit()
+    conn.close()
+    return DBinfo
+
 def removePuzzle(id):
     # conn = sqlite3.connect('./MazeSolver/maze.db')
     conn = sqlite3.connect('./maze.db')
