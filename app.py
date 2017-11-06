@@ -90,7 +90,7 @@ def DBdata():
 def puzzelPath():
     pid = request.form['pid']
     pPath = getPuzzlePath(int(pid))
-    x,y = pPath
+    x,= pPath
     oldoutput = './static/images/output.jpg'
     newpath = x
     shutil.copyfile(newpath, oldoutput)
@@ -138,6 +138,7 @@ def removePuzzle(id):
     c.execute("DELETE FROM puzzle WHERE id = (?)",(id,))
     conn.commit()
     conn.close()
+    print("deleted Bram")
 
 
 @app.route('/video_feed')
@@ -194,7 +195,7 @@ if __name__ == '__main__':
     print(getPuzzlePath(1))
     #insertImage("Baap")
     #getPuzzles()
-    #app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
 
 
 
