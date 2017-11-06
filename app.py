@@ -90,6 +90,10 @@ def DBdata():
 def puzzelPath():
     pid = request.form['pid']
     pPath = getPuzzlePath(int(pid))
+    print(pPath)
+    oldoutput = './static/images/output.jpg'
+    newpath = pPath
+    shutil.copyfile(newpath, oldoutput)
     return jsonify({'pPath': pPath})
 
 def insertImage(name):
@@ -187,10 +191,10 @@ def command(cmd=None):
 
 if __name__ == '__main__':
     #getPuzzlePath(1);
-    #print(getPuzzlePath(1))
+    print(getPuzzlePath(1))
     #insertImage("Baap")
     #getPuzzles()
-    app.run(debug=True, host='0.0.0.0')
+    #app.run(debug=True, host='0.0.0.0')
 
 
 
