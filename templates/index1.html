@@ -144,6 +144,11 @@
 				<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</div>
+
+
+			<div id="loadText">
+				<p id="sText">Loaded: </p><p class="loadedImg" id="sAlg">None</p>
+			</div>
 			<div class="col-xs-12">
 				<div id="myDropdown" class="dropdown" role="group">
 					<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown" id="history">History
@@ -167,7 +172,9 @@
 						<li><a href="#">FPGA Greedy Search</a></li>
 					</ul>
 				</div>
-				<p>Selected algoritm: </p><p class="status">PI Breadth-first Search</p>
+
+					<p id="sText">Selected algoritm: </p><p class="status" id="sAlg">PI Breadth-first Search</p>
+
 			</div>
 			<div class="col-xs-12">
 				<button type="button" class="btn btn-success btn-block" id="start">Solve Maze</button>

@@ -63,6 +63,21 @@
     padding-left:10px;
 }
 
+#sText{
+font-style: italic;
+}
+
+#sAlg{
+font-size: 18px;
+font-weight: bold;
+}
+
+.jumbotron p {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 200;
+}
+
 .modal-lg {
     width: 90%;
 }

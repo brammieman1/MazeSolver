@@ -218,12 +218,10 @@ function mousePos(e) {
 
 function mouseRelease(){
     editReady = false;
-    console.log("falsejaja");
     }
 
 function mousePressed(){
     editReady = true;
-    console.log("true");
     }
 
 function checkIfOld(){

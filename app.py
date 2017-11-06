@@ -1,8 +1,8 @@
 import gen as gen
 import shutil
 from flask import Flask, render_template, Response, jsonify, request
-# import functions as pfun
-# from camera_pi import Camera
+import functions as pfun
+from camera_pi import Camera
 import BFS as bfs
 import numpy as np
 import sqlite3

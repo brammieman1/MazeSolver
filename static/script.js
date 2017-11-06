@@ -43,6 +43,7 @@ $("#startMsg").show();
 $("#maze").hide();
 $("#grid").hide();
 $("#load").hide();
+$("#loadText").hide();
 
 var editMode = 0;
 var solutionBlock = false;
@@ -100,8 +101,13 @@ function callPython(){
 	}
 
 	if (this.id == "delete"){
+        $("#maze").hide();
+		$("#grid").hide();
+		$("#startMsg").show();
+		$("#loadText").hide();
+		document.getElementById("convert").disabled = true;
 
-	    if (pid != 0){
+	    if (picId != 0){
 	    var postDelete = $.post( "/deleteMaze", {
         mid: picId
         });
@@ -125,6 +131,7 @@ function callPython(){
 
             $('.dropdown-db li > a').click(function(e){
                 picId = this.id;
+                $('.loadedImg').text(this.innerHTML);
 
                 //hide all on screen
                 //show loader
@@ -150,6 +157,7 @@ function callPython(){
                 document.getElementById("maze").src = file+'?t=' + new Date().getTime();
                 $("#load").hide();
                 $("#maze").show();
+                $("#loadText").show();
                 document.getElementById("convert").disabled = false;
 
                 console.log("Saved Image is loaded!")
@@ -172,6 +180,7 @@ function callPython(){
         $("#maze").hide();
 		$("#grid").hide();
 		$("#startMsg").hide();
+		$("#loadText").hide();
 
 	    //get the picture taken
 	    var getSnap = $.get('/snapshot');
