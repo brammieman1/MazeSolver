@@ -21,7 +21,7 @@ def binarize_image(img_path, threshold):
     listImage = image
     return listImage
 
-def binarize_array(numpy_array, threshold=75):
+def binarize_array(numpy_array, threshold=200):
     """Binarize a numpy array."""
     result = [[1 for x in range(width)] for y in range(height)]
     for i in range(len(numpy_array)):
