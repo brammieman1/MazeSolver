@@ -16,7 +16,7 @@ def picture():
    time.sleep(1)
    with picamera.PiCamera() as camera:
        camera.framerate = 24
-       camera.resolution = (1280, 960)
+       camera.resolution = (320, 240)
        time.sleep(2)
        camera.capture(output)
        print('picture taken')
